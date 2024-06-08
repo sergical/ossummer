@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useAccount } from 'wagmi';
 import { useWriteContracts } from 'wagmi/experimental';
@@ -6,13 +9,17 @@ import isLocal from '../../../src/utils/isLocal';
 import { usePaymasterBundlerContract } from '../_contracts/usePaymasterBundlerContract';
 import { CallStatus } from './CallStatus';
 
-// Use the local API URL to target the Paymaster directly without a proxy
-// if running on localhost, otherwise use the Paymaster Proxy.
-const paymasterURL = process.env.NEXT_PUBLIC_PAYMASTER_URL;
-const isLocalEnv = isLocal();
-const defaultUrl = isLocalEnv ? paymasterURL : `${document.location.origin}/api/paymaster-proxy`;
-
 export default function PaymasterBundlerDemo() {
+  const [defaultUrl, setDefaultUrl] = useState<string>();
+
+  useEffect(() => {
+    // Use the local API URL to target the Paymaster directly without a proxy
+    // if running on localhost, otherwise use the Paymaster Proxy.
+    const paymasterURL = process.env.NEXT_PUBLIC_PAYMASTER_URL;
+    const isLocalEnv = isLocal();
+    setDefaultUrl(isLocalEnv ? paymasterURL : `${document.location.origin}/api/paymaster-proxy`);
+  }, []);
+
   const { address } = useAccount();
   const { data: callID, writeContracts } = useWriteContracts();
   const contract = usePaymasterBundlerContract();

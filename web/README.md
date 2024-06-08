@@ -1,8 +1,8 @@
-# Build Onchain Apps Template experiences
+# Open Source Summer - Buildathon project
 
 ## Getting Started
 
-#### Step 1: Setup Environment Variables
+### Step 1: Setup Environment Variables
 
 - Obtain a Base RPC URL from [Coinbase Developer Platform](https://www.coinbase.com/developer-platform/products/base-node?utm_source=boat) and assign to the `.env.local` file
 
@@ -11,7 +11,7 @@ NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=ADD_WALLET_CONNECT_PROJECT_ID_HERE
 NEXT_PRIVATE_RPC_URL=ADD_RPC_URL_HERE
 ```
 
-#### Step 2: Install and Run your onchain app
+### Step 2: Install and Run your onchain app
 
 ```bash
 # Install

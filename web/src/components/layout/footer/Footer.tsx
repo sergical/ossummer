@@ -1,6 +1,6 @@
 'use client';
 
-import { GitHubLogoIcon, ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
 import NextLink from 'next/link';
 import { NavbarLink } from '@/components/layout/header/Navbar';
 import FooterIcon from './FooterIcon';
@@ -20,7 +20,7 @@ export default function Footer() {
                 passHref
                 className="font-robotoMono text-center text-xl font-medium text-white no-underline"
               >
-                BUILD ONCHAIN APPS
+                OSSUMMER
               </NextLink>
               <NavbarLink href="https://github.com/coinbase/build-onchain-apps" target="_blank">
                 <GitHubLogoIcon

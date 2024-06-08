@@ -1,4 +1,4 @@
-# Build Onchain Apps Template
+# Open Source Summer - Buildathon project
 
 This project has two main folders:
 

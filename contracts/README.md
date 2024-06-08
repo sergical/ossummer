@@ -1,8 +1,8 @@
-## Contracts
+# Contracts
 
 This project is built using Foundry. For more information, visit the docs [here](https://book.getfoundry.sh/)
 
-# Disclaimer
+## Disclaimer
 
 The provided Solidity contracts are intended solely for educational purposes and are
 not warranted for any specific use. They have not been audited and may contain vulnerabilities, hence should
@@ -11,7 +11,7 @@ comprehensive security audit before any real-world application to mitigate risks
 consequences. The author(s) disclaim all liability for any damages arising from the use of these contracts.
 Use at your own risk, acknowledging the inherent risks of smart contract technology on the blockchain.
 
-# Contents
+## Contents
 
 - [Introduction](#introduction)
   - [Contracts](#contracts)
@@ -26,17 +26,15 @@ Use at your own risk, acknowledging the inherent risks of smart contract technol
 
 ## Introduction
 
-### Contracts
-
-#### BuyMeACoffee
+### BuyMeACoffee
 
 This repository contains a sample `BuyMeACoffee.sol` contract which allows the user to buy the owner a coffee with `0.001 ether`. Along with that the user can send the owner a memo.
 
-#### CustomERC1155
+### CustomERC1155
 
 It also contains a sample implementation (`CustomERC1155.sol`) of ERC1155 using openzeppelin's [ERC1155 contract](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol)
 
-#### AllowlistNFT
+### AllowlistNFT
 
 Contract that allows a user to mint a ERC721A either from a allowlist or from a public mint. This is useful for mints where you want to allow specified users to have early access and (optionally) a lower mint price. After your defined allowlist window ends, the public mint will begin immediately. This contract uses [ERC721A](https://github.com/chiru-labs/ERC721A) as base to allow for more efficient minting of multiple NFTs in a single transaction.
 

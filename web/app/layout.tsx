@@ -1,6 +1,6 @@
 import './global.css';
+import { Analytics } from '@vercel/analytics/react';
 
-import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import OnchainProviders from '@/OnchainProviders';
 import { initAnalytics } from '@/utils/analytics';
 import { inter } from './fonts';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 // Stat analytics before the App renders,
-// so we can track page views and early events
+// so we can track page views and early events1
 initAnalytics();
 
 /** Root layout to define the structure of every page
@@ -30,8 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.className}`}>
       <body className="flex flex-1 flex-col">
         <OnchainProviders>{children}</OnchainProviders>
+        <Analytics />
       </body>
-      <GoogleAnalytics />
     </html>
   );
 }

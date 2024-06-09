@@ -6114,6 +6114,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-variance-authority@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "class-variance-authority@npm:0.7.0"
+  dependencies:
+    clsx: "npm:2.0.0"
+  checksum: 10c0/e11c57edf4bf50ef1c97bae41d68885afbaaedba26c48b7cc5dfb033390fed7012147e9532168d8c4f3497fce4dff15e20e6e60b8c9c9a4b0fe26b0e804513db
+  languageName: node
+  linkType: hard
+
 "clean-stack@npm:^2.0.0":
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
@@ -6180,6 +6189,13 @@ __metadata:
     kind-of: "npm:^6.0.2"
     shallow-clone: "npm:^3.0.0"
   checksum: 10c0/637753615aa24adf0f2d505947a1bb75e63964309034a1cf56ba4b1f30af155201edd38d26ffe26911adaae267a3c138b344a4947d39f5fc1b6d6108125aa758
+  languageName: node
+  linkType: hard
+
+"clsx@npm:2.0.0":
+  version: 2.0.0
+  resolution: "clsx@npm:2.0.0"
+  checksum: 10c0/c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
   languageName: node
   linkType: hard
 
@@ -10676,6 +10692,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.390.0":
+  version: 0.390.0
+  resolution: "lucide-react@npm:0.390.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/d8062c311e703c592c0704d624855b965ba2caa3260f7158f65eb6a63c0826150ac67d35df210d58830bc6d85f8ad0e98e62c7e02e6f9e37690909aa046f64d0
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.5.0":
   version: 1.5.0
   resolution: "lz-string@npm:1.5.0"
@@ -11874,6 +11899,7 @@ __metadata:
     abitype: "npm:^0.10.3"
     autoprefixer: "npm:^10.4.16"
     babel-jest: "npm:^29.7.0"
+    class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
     eslint: "npm:^8.27.0"
     eslint-config-airbnb: "npm:19.0.4"
@@ -11899,6 +11925,7 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     jest-extended: "npm:^4.0.2"
+    lucide-react: "npm:^0.390.0"
     net: "npm:^1.0.2"
     next: "npm:14.2.3"
     next-pwa: "npm:5.6.0"
@@ -11925,6 +11952,7 @@ __metadata:
     stylelint-order: "npm:^6.0.4"
     tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.0"
+    tailwindcss-animate: "npm:^1.0.7"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:~5.3.3"
     unified: "npm:^11.0.4"
@@ -14257,6 +14285,15 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.24.1"
   checksum: 10c0/5ea308e23c3ab1cf4c3f35f0a471753f4d3ed232d63dd7c09151a74428737321902203d90e9f0cb76ea5c3978e71b0adbc503dc455e56cda967a7674ae4b94b5
+  languageName: node
+  linkType: hard
+
+"tailwindcss-animate@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "tailwindcss-animate@npm:1.0.7"
+  peerDependencies:
+    tailwindcss: "*"
+  checksum: 10c0/ec7dbd1631076b97d66a1fbaaa06e0725fccfa63119221e8d87a997b02dcede98ad88bb1ef6665b968f5d260fcefb10592e0299ca70208d365b37761edf5e19a
   languageName: node
   linkType: hard
 

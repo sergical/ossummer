@@ -14,6 +14,6 @@ export const metadata = generateMetadata({
  * https://nextjs.org/docs/pages/building-your-application/upgrading/app-router-migration#step-4-migrating-pages
  * https://nextjs.org/docs/app/building-your-application/rendering/client-components
  */
-export default function Page() {
+export default async function Page() {
   return <HomePage />;
 }

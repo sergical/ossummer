@@ -15,7 +15,7 @@ export default function HomePage() {
       <Header />
       <main className="container mx-auto flex flex-col px-8 py-16">
         <div>
-          <h2 className="text-xl">Developer information</h2>
+          <h2 className="text-xl">Developer huh information</h2>
           <br />
           <h3 className="text-lg">Account</h3>
           <ul>

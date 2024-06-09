@@ -4,6 +4,7 @@ import { Inter as FontSans } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
 import OnchainProviders from '@/OnchainProviders';
+import { ThemeProvider } from '@/ThemeProvider';
 import { initAnalytics } from '@/utils/analytics';
 import { inter } from './fonts';
 import type { Metadata } from 'next';
@@ -41,7 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           fontSans.variable,
         )}
       >
-        <OnchainProviders>{children}</OnchainProviders>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <OnchainProviders>{children}</OnchainProviders>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

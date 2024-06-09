@@ -10,6 +10,7 @@ import { clsx } from 'clsx';
 import AccountConnect from './AccountConnect';
 import { Experiences } from './Experiences';
 import { NavbarLink, NavbarTitle } from './Navbar';
+import { ThemeToggle } from './ThemeToggle';
 
 export default function NavbarMobile() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,6 +77,9 @@ export default function NavbarMobile() {
           </ul>
           <div className="mx-2 mt-4">
             <AccountConnect />
+          </div>
+          <div className="mx-2 mt-4">
+            <ThemeToggle />
           </div>
         </div>
       </nav>

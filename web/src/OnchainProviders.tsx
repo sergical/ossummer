@@ -3,10 +3,10 @@
 import { ReactNode } from 'react';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { PrivyProvider } from '@privy-io/react-auth';
+import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
-import { baseSepolia } from 'viem/chains';
-import { WagmiProvider } from 'wagmi';
+import { base, baseSepolia } from 'viem/chains';
 import { createWagmiConfig } from '@/store/createWagmiConfig';
 
 type Props = { children: ReactNode };
@@ -14,6 +14,8 @@ type Props = { children: ReactNode };
 const queryClient = new QueryClient();
 
 const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string;
+
+const ENVIRONMENT = process.env.ENVIRONMENT as string;
 
 const wagmiConfig = createWagmiConfig(rpcUrl);
 
@@ -42,11 +44,17 @@ function OnchainProviders({ children }: Props) {
         },
       }}
     >
-      <WagmiProvider config={wagmiConfig}>
-        <QueryClientProvider client={queryClient}>
-          <OnchainKitProvider chain={baseSepolia}>{children}</OnchainKitProvider>
-        </QueryClientProvider>
-      </WagmiProvider>
+      <QueryClientProvider client={queryClient}>
+        <WagmiProvider config={wagmiConfig}>
+          <OnchainKitProvider
+            chain={
+              ENVIRONMENT === 'localhost' || ENVIRONMENT === 'development' ? baseSepolia : base
+            }
+          >
+            {children}
+          </OnchainKitProvider>
+        </WagmiProvider>
+      </QueryClientProvider>
     </PrivyProvider>
   );
 }

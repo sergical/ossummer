@@ -13,7 +13,7 @@ type Props = { children: ReactNode };
 
 const queryClient = new QueryClient();
 
-const rpcUrl = '/api/rpc';
+const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string;
 
 const wagmiConfig = createWagmiConfig(rpcUrl);
 

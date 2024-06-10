@@ -21,6 +21,14 @@ const nextConfig = withPWA({
         protocol: 'https',
         hostname: 'ipfs.io',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.magicui.design',
+      },
+      {
+        protocol: 'https',
+        hostname: 'magicui.design',
+      },
     ],
   },
 });

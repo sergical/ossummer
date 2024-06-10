@@ -1,69 +1,69 @@
-'use client';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { ArrowTopRightIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
-import NextLink from 'next/link';
-import { NavbarLink } from '@/components/layout/header/Navbar';
-import FooterIcon from './FooterIcon';
+type Icon = {
+  icon: JSX.Element;
+  url: string;
+};
+
+const icons: Icon[] = [{ icon: <GitHubLogoIcon />, url: 'https://github.com/sergical/ossummer' }];
+
+type LinkType = {
+  text: string;
+  url: string;
+};
+
+const links: LinkType[] = [
+  { text: 'About', url: '#' },
+  { text: 'Services', url: '#' },
+  { text: 'Contact', url: '#' },
+];
 
 export default function Footer() {
   return (
-    <footer className="flex flex-1 flex-col justify-end">
-      <div className="flex flex-col justify-between gap-16 bg-boat-footer-dark-gray py-12">
-        <div className="container mx-auto flex w-full flex-col justify-between gap-16 px-8 md:flex-row">
-          <div className="flex flex-col justify-between">
-            <div className="flex h-8 items-center justify-start gap-4">
-              <NextLink href="/" passHref className="relative h-8 w-8" aria-label="Home page">
-                <FooterIcon />
-              </NextLink>
-              <NextLink
-                href="/"
-                passHref
-                className="font-robotoMono text-center text-xl font-medium text-white no-underline"
-              >
-                OSSUMMER
-              </NextLink>
-              <NavbarLink href="https://github.com/coinbase/build-onchain-apps" target="_blank">
-                <GitHubLogoIcon
-                  width="24"
-                  height="24"
-                  aria-label="build-onchain-apps Github respository"
-                />
-              </NavbarLink>
-            </div>
+    <footer className="container flex flex-col gap-y-5 rounded-lg px-7 py-5 md:px-10">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-x-2">
+          <Image
+            width={50}
+            height={50}
+            className="h-5 w-5"
+            src="https://magicui.design/icon.png"
+            alt="MagicUI Logo"
+          />
+          <h2 className="text-lg font-bold text-neutral-900 dark:text-white">OSSUMMER</h2>
+        </div>
 
-            <div className="mt-8 flex flex-col items-center justify-center">
-              <p className="text-base font-normal leading-7 text-boat-footer-light-gray">
-                This project is licensed under the MIT License - see the{' '}
-                <NextLink
-                  href="https://github.com/coinbase/build-onchain-apps/blob/main/LICENSE.md"
-                  className="underline"
-                  target="_blank"
-                >
-                  LICENSE.md
-                </NextLink>{' '}
-                file for details
-              </p>
-            </div>
-          </div>
-
-          <div className="font-robotoMono flex flex-col items-start justify-center gap-4 text-center text-xl font-medium text-white">
-            EXPERIENCES
-            <NavbarLink href="/buy-me-coffee">
-              <span className="flex items-center gap-1 px-2">
-                Buy Me Coffee <ArrowTopRightIcon width="16" height="16" />
-              </span>
-            </NavbarLink>
-            <NavbarLink href="/mint">
-              <span className="flex items-center gap-1 px-2">
-                Mint NFT <ArrowTopRightIcon width="16" height="16" />
-              </span>
-            </NavbarLink>
-            <NavbarLink href="/paymaster-bundler">
-              <span className="flex items-center gap-1 px-2">
-                Paymaster Bundler <ArrowTopRightIcon width="16" height="16" />
-              </span>
-            </NavbarLink>
-          </div>
+        <div className="flex gap-x-2">
+          {icons.map((icon, index) => (
+            <Link
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              href={icon.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-5 w-5 items-center justify-center text-neutral-400 transition-all duration-100 ease-linear hover:text-neutral-900 hover:underline hover:underline-offset-4 dark:font-medium dark:text-neutral-500 hover:dark:text-neutral-100"
+            >
+              {icon.icon}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-col justify-between gap-y-5 md:flex-row md:items-center">
+        <ul className="flex flex-col gap-x-5 gap-y-2 text-neutral-500 md:flex-row md:items-center ">
+          {links.map((link, index) => (
+            <li
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              className="text-[15px]/normal font-medium text-neutral-400 transition-all duration-100 ease-linear hover:text-neutral-900 hover:underline hover:underline-offset-4 dark:font-medium dark:text-neutral-400 hover:dark:text-neutral-100"
+            >
+              <Link href={link.url}>{link.text}</Link>
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center justify-between text-sm font-medium tracking-tight text-neutral-500 dark:text-neutral-400">
+          <p>All rights onchain - MIT - let&apos;s build 🔵</p>
         </div>
       </div>
     </footer>

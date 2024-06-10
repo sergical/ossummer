@@ -7,6 +7,9 @@ export function useOSSummerRepositories() {
     queryKey: ['useOSSummerRepositories'],
     queryFn: async () => {
       const response = await fetch(`${DEFAULT_URL}/api/github/search`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch repositories');
+      }
       return response.json() as Promise<Repository[]>;
     },
   });

@@ -1,14 +1,6 @@
 import { useCallback, useState } from 'react';
-import {
-  ChevronDownIcon,
-  Cross1Icon,
-  GitHubLogoIcon,
-  HamburgerMenuIcon,
-} from '@radix-ui/react-icons';
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { clsx } from 'clsx';
+import { Cross1Icon, GitHubLogoIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 import AccountConnect from './AccountConnect';
-import { Experiences } from './Experiences';
 import { NavbarLink, NavbarTitle } from './Navbar';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -46,33 +38,6 @@ export default function NavbarMobile() {
             </li>
             <li className="flex">
               <NavbarLink href="/#get-started">Get Started</NavbarLink>
-            </li>
-            <li className="flex">
-              <NavigationMenu.Root className="relative flex flex-grow flex-col">
-                <NavigationMenu.List className={clsx('flex flex-row space-x-2')}>
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Trigger className="group flex items-center justify-start gap-1">
-                      <span className="font-robotoMono text-center text-base font-normal text-white">
-                        Experiences
-                      </span>
-                      <ChevronDownIcon
-                        className="transform transition duration-200 ease-in-out group-data-[state=open]:rotate-180"
-                        width="16"
-                        height="16"
-                      />
-                    </NavigationMenu.Trigger>
-                    <NavigationMenu.Content
-                      className={clsx(
-                        'h-38 inline-flex flex-grow flex-col items-start justify-start gap-6',
-                        'mt-4 rounded-lg p-6 shadow backdrop-blur-2xl',
-                      )}
-                    >
-                      <Experiences />
-                    </NavigationMenu.Content>
-                  </NavigationMenu.Item>
-                </NavigationMenu.List>
-                <NavigationMenu.Viewport className={clsx('flex flex-col justify-center')} />
-              </NavigationMenu.Root>
             </li>
           </ul>
           <div className="mx-2 mt-4">

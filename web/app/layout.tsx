@@ -35,7 +35,7 @@ initAnalytics();
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
       <body
         className={cn(
           'flex min-h-screen flex-1 flex-col bg-background font-sans antialiased',

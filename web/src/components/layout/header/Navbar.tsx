@@ -1,9 +1,7 @@
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
-
 import { clsx } from 'clsx';
 import NextLink from 'next/link';
-import AccountConnect from './AccountConnect';
 
+import PrivyLogin from './PrivyLogin';
 import { ThemeToggle } from './ThemeToggle';
 
 export function NavbarLink({
@@ -41,7 +39,7 @@ export function NavbarTitle() {
         className="font-robotoMono text-center text-xl font-medium no-underline"
         aria-label="build-onchain-apps Github repository"
       >
-        OPEN SOURCE SUMMER
+        OSSUMMER
       </NextLink>
     </div>
   );
@@ -60,20 +58,9 @@ function Navbar() {
         <div className="flex items-center justify-start gap-8">
           <ul className="hidden items-center justify-start gap-8 md:flex">
             <li className="flex">
-              <NavbarLink href="/#get-started">Get Started</NavbarLink>
+              <PrivyLogin />
             </li>
-            <li className="flex">
-              <AccountConnect />
-            </li>
-            <li className="flex">
-              <NavbarLink href="https://github.com/sergical/ossummer" target="_blank">
-                <GitHubLogoIcon
-                  width="24"
-                  height="24"
-                  aria-label="build-onchain-apps Github respository"
-                />
-              </NavbarLink>
-            </li>
+
             <li className="flex">
               <ThemeToggle />
             </li>

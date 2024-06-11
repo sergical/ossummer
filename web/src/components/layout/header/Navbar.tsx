@@ -50,7 +50,7 @@ function Navbar() {
     <nav
       className={clsx(
         'flex flex-1 flex-grow items-center justify-between',
-        'rounded-[50px] border border-stone-300 bg-background bg-opacity-10 p-4 backdrop-blur-2xl',
+        'rounded-[50px] border border-border bg-background/20 p-4 backdrop-blur-2xl',
       )}
     >
       <div className="flex h-8 grow items-center justify-between gap-4">

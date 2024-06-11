@@ -15,9 +15,8 @@ type LinkType = {
 };
 
 const links: LinkType[] = [
-  { text: 'About', url: '#' },
-  { text: 'Services', url: '#' },
-  { text: 'Contact', url: '#' },
+  { text: 'Buy me coffee', url: '/buy-me-coffee' },
+  { text: 'ShipCasts', url: '/shipcasts' },
 ];
 
 export default function Footer() {

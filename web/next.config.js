@@ -29,6 +29,19 @@ const nextConfig = withPWA({
         protocol: 'https',
         hostname: 'magicui.design',
       },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+      },
+
+      {
+        protocol: 'https',
+        hostname: 'ipfs.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatar.vercel.sh',
+      },
     ],
   },
 });

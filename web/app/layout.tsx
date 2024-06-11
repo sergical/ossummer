@@ -2,6 +2,7 @@ import './global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter as FontSans } from 'next/font/google';
 
+import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import OnchainProviders from '@/OnchainProviders';
 import { ThemeProvider } from '@/ThemeProvider';
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <OnchainProviders>{children}</OnchainProviders>
+          <Toaster richColors />
         </ThemeProvider>
         <Analytics />
       </body>

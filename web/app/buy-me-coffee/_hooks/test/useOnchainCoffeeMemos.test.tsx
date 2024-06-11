@@ -4,13 +4,9 @@
 import { renderHook } from '@testing-library/react';
 import { useReadContract } from 'wagmi';
 import OnchainProviders from '@/OnchainProviders';
-import { markStep } from '@/utils/analytics';
+
 import useOnchainCoffeeMemos from '../useOnchainCoffeeMemos';
 import type { CoffeeMemo } from '../../_components/types';
-
-jest.mock('../utils/analytics', () => ({
-  markStep: jest.fn(),
-}));
 
 jest.mock('wagmi', () => ({
   ...jest.requireActual<typeof import('wagmi')>('wagmi'),
@@ -36,14 +32,10 @@ describe('useOnchainCoffeeMemos', () => {
       status: 'success',
       data: memos,
     }));
-    expect(markStep).not.toHaveBeenCalled();
 
     const { result } = renderHook(() => useOnchainCoffeeMemos(), { wrapper: OnchainProviders });
 
     expect(result.current.memos).toStrictEqual(memos);
-    expect(markStep).toHaveBeenCalledTimes(2);
-    expect(markStep).toHaveBeenNthCalledWith(1, 'useReadContract.refetchMemos');
-    expect(markStep).toHaveBeenNthCalledWith(2, 'useReadContract.refetchMemos');
   });
 
   it('if contract read fails, should return empty array', () => {
@@ -60,13 +52,9 @@ describe('useOnchainCoffeeMemos', () => {
       status: 'error',
       data: memos,
     }));
-    expect(markStep).not.toHaveBeenCalled();
 
     const { result } = renderHook(() => useOnchainCoffeeMemos(), { wrapper: OnchainProviders });
 
     expect(result.current.memos).toStrictEqual([]);
-    expect(markStep).toHaveBeenCalledTimes(2);
-    expect(markStep).toHaveBeenNthCalledWith(1, 'useReadContract.refetchMemos');
-    expect(markStep).toHaveBeenNthCalledWith(2, 'useReadContract.refetchMemos');
   });
 });

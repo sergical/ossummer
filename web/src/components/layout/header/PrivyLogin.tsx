@@ -1,23 +1,30 @@
 'use client';
-import { usePrivy } from '@privy-io/react-auth';
+import { useLogin, usePrivy } from '@privy-io/react-auth';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function PrivyLogin() {
-  const { ready, authenticated, login, logout } = usePrivy();
+  const router = useRouter();
+  const { ready, authenticated } = usePrivy();
+
+  const { login } = useLogin({
+    onComplete: (user, isNewUser, wasAlreadyAuthenticated, loginMethod, linkedAccount) => {
+      console.log(user, isNewUser, wasAlreadyAuthenticated, loginMethod, linkedAccount);
+      if (!wasAlreadyAuthenticated) {
+        router.push('/profile');
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      // Any logic you'd like to execute after a user exits the login flow or there is an error
+    },
+  });
+
   // Disable login when Privy is not ready or the user is already authenticated
   const disableLogin = !ready || (ready && authenticated);
-  const disableLogout = !ready || (ready && !authenticated);
 
   if (authenticated) {
-    return (
-      <button
-        disabled={disableLogout}
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={logout}
-        type="button"
-      >
-        Log out
-      </button>
-    );
+    return <Link href="/profile">Profile</Link>;
   }
   return (
     <button disabled={disableLogin} onClick={login} type="button">

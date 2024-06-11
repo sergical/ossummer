@@ -15,12 +15,12 @@ export function Partners() {
             <Marquee className="max-w-full [--duration:40s]">
               {companies.map((logo, idx) => (
                 <Image
-                  width={100}
-                  height={100}
+                  width={112}
+                  height={40}
                   // eslint-disable-next-line react/no-array-index-key
                   key={idx}
                   src={`https://cdn.magicui.design/companies/${logo}.svg`}
-                  className="h-10 w-28 dark:brightness-0 dark:invert"
+                  className="h-10 w-28 object-cover dark:brightness-0 dark:invert"
                   alt={logo}
                 />
               ))}

@@ -13367,6 +13367,7 @@ __metadata:
     tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:^3.4.0"
     tailwindcss-animate: "npm:^1.0.7"
+    tailwindcss-aria-attributes: "npm:^2.0.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:~5.3.3"
     unified: "npm:^11.0.4"
@@ -15860,6 +15861,15 @@ __metadata:
   peerDependencies:
     tailwindcss: "*"
   checksum: 10c0/ec7dbd1631076b97d66a1fbaaa06e0725fccfa63119221e8d87a997b02dcede98ad88bb1ef6665b968f5d260fcefb10592e0299ca70208d365b37761edf5e19a
+  languageName: node
+  linkType: hard
+
+"tailwindcss-aria-attributes@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "tailwindcss-aria-attributes@npm:2.0.1"
+  peerDependencies:
+    tailwindcss: ">=2.2"
+  checksum: 10c0/d25211e8725e31e963ad1aed989249d8601ef64f0758f9dfa01d19a3a191975a175bb258aa37a0b919015acb19de36d9cf522477d5aa39d2d93b8c18fd68139b
   languageName: node
   linkType: hard
 

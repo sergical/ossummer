@@ -126,7 +126,7 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('tailwindcss-aria-attributes')],
 } satisfies Config;
 
 export default config;

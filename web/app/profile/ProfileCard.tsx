@@ -26,7 +26,7 @@ export default function ProfileCard() {
   if (!address) return null;
 
   return (
-    <Card className="max-w-96">
+    <Card className="w-full">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">

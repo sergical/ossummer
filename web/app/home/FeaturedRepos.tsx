@@ -6,20 +6,20 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Skeleton } from '@/components/ui/skeleton';
 import { useOSSummerRepositories } from '@/hooks/useOSSummerRepositories';
 
+export const loadingMarkup = Array.from({ length: 3 }).map((_, index) => (
+  // eslint-disable-next-line react/no-array-index-key
+  <Card key={index}>
+    <CardHeader>
+      <Skeleton className="h-[25px] w-[full] rounded-xl" />
+    </CardHeader>
+    <CardContent>
+      <Skeleton className="h-[25px] w-[full] rounded-xl" />
+    </CardContent>
+  </Card>
+));
+
 export default function FeaturedRepos() {
   const { data: repositories, isLoading } = useOSSummerRepositories();
-
-  const loadingMarkup = Array.from({ length: 3 }).map((_, index) => (
-    // eslint-disable-next-line react/no-array-index-key
-    <Card key={index}>
-      <CardHeader>
-        <Skeleton className="h-[25px] w-[full] rounded-xl" />
-      </CardHeader>
-      <CardContent>
-        <Skeleton className="h-[25px] w-[full] rounded-xl" />
-      </CardContent>
-    </Card>
-  ));
 
   return (
     <section className="w-full py-12 md:py-16 lg:py-20">

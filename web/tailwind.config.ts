@@ -83,6 +83,14 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
+        error: {
+          DEFAULT: 'hsl(var(--error))',
+          foreground: 'hsl(var(--error-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -90,6 +98,7 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       animation: {
+        backgroundPositionSpin: 'background-position-spin 3000ms infinite alternate',
         grid: 'grid 15s linear infinite',
         'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
         marquee: 'marquee var(--duration) linear infinite',
@@ -123,9 +132,14 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'background-position-spin': {
+          '0%': { backgroundPosition: 'top center' },
+          '100%': { backgroundPosition: 'bottom center' },
+        },
       },
     },
   },
+  // eslint-disable-next-line import/no-extraneous-dependencies
   plugins: [require('tailwindcss-animate'), require('tailwindcss-aria-attributes')],
 } satisfies Config;
 

@@ -22,6 +22,27 @@ export type RepositoryOwner = {
   starred_at: string;
 };
 
+export type GitHubUser = {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+};
+
 export type Repository = {
   id: number;
   node_id: string;
@@ -134,6 +155,78 @@ export type Repository = {
   allow_forking: boolean;
   is_template: boolean;
   web_commit_signoff_required: boolean;
+};
+
+export type PullRequest = {
+  url: string;
+  id: number;
+  node_id: string;
+  html_url: string;
+  diff_url: string;
+  patch_url: string;
+  issue_url: string;
+  number: number;
+  state: string;
+  locked: boolean;
+  title: string;
+  user: GitHubUser;
+  body: string | null;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  merged_at: string | null;
+  merge_commit_sha: string;
+  assignee: GitHubUser | null;
+  assignees: GitHubUser[];
+  requested_reviewers: GitHubUser[];
+  requested_teams: unknown[];
+  labels: unknown[];
+  milestone: unknown | null;
+  draft: boolean;
+  commits_url: string;
+  review_comments_url: string;
+  review_comment_url: string;
+  comments_url: string;
+  statuses_url: string;
+  head: {
+    label: string;
+    ref: string;
+    sha: string;
+    user: GitHubUser;
+    repo: Repository;
+  };
+  base: {
+    label: string;
+    ref: string;
+    sha: string;
+    user: GitHubUser;
+    repo: Repository;
+  };
+  _links: {
+    self: { href: string };
+    html: { href: string };
+    issue: { href: string };
+    comments: { href: string };
+    review_comments: { href: string };
+    review_comment: { href: string };
+    commits: { href: string };
+    statuses: { href: string };
+  };
+  author_association: string;
+  auto_merge: unknown | null;
+  active_lock_reason: unknown | null;
+  merged: boolean;
+  mergeable: boolean;
+  rebaseable: boolean;
+  mergeable_state: string;
+  merged_by: GitHubUser | null;
+  comments: number;
+  review_comments: number;
+  maintainer_can_modify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
 };
 
 export type SearchResult = {

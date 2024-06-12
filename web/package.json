@@ -6,6 +6,7 @@
     "build:clean": "rm -rf .next && next build",
     "build": "next build",
     "postbuild": "prisma migrate deploy",
+    "postinstall": "prisma generate",
     "check": "yarn format && yarn lint && yarn stylelint",
     "dev": "next dev",
     "format": "prettier --log-level warn --write .",

@@ -1,7 +1,7 @@
 'use client';
 
-import { loadingMarkup } from 'app/home/FeaturedRepos';
 import { useSubmissions } from '@/hooks/useSubmissions';
+import { loadingMarkup } from 'app/home/FeaturedRepos';
 import Submission from './Submission';
 
 function PullRequestList() {

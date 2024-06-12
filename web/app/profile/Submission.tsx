@@ -47,7 +47,13 @@ export default function Submission({ pr }: { pr: PullRequest }) {
       <CardHeader>
         <div className="flex justify-between">
           <h3 className="text-lg font-medium">{pr.title}</h3>
-          <Badge variant={pr.state === 'merged' ? 'success' : 'default'}>{pr.state}</Badge>
+          <Badge
+            variant={
+              pr.state === 'merged' ? 'success' : pr.state === 'closed' ? 'destructive' : 'default'
+            }
+          >
+            {pr.state}
+          </Badge>
         </div>
       </CardHeader>
       <CardFooter className="flex justify-end">
@@ -57,7 +63,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
               View PR
             </Link>
           </Button>
-          {pr.state !== 'merged' && (
+          {pr.state === 'open' && (
             <Button
               disabled={loading}
               type="button"

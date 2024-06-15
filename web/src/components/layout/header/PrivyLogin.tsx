@@ -1,7 +1,8 @@
 'use client';
+
 import { useLogin, usePrivy } from '@privy-io/react-auth';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import ProfileNavigation from './ProfileNavigation';
 
 export default function PrivyLogin() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function PrivyLogin() {
   const disableLogin = !ready || (ready && authenticated);
 
   if (authenticated) {
-    return <Link href="/profile">Profile</Link>;
+    return <ProfileNavigation />;
   }
   return (
     <button disabled={disableLogin} onClick={login} type="button">

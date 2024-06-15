@@ -3415,11 +3415,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@privy-io/react-auth@npm:^1.68.0":
-  version: 1.68.0
-  resolution: "@privy-io/react-auth@npm:1.68.0"
+"@privy-io/react-auth@npm:^1.71.0":
+  version: 1.71.0
+  resolution: "@privy-io/react-auth@npm:1.71.0"
   dependencies:
-    "@coinbase/wallet-sdk": "npm:4.0.2"
+    "@coinbase/wallet-sdk": "npm:4.0.3"
     "@ethersproject/abstract-signer": "npm:^5.7.0"
     "@ethersproject/address": "npm:^5.7.0"
     "@ethersproject/bignumber": "npm:^5.7.0"
@@ -3461,7 +3461,7 @@ __metadata:
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10c0/7ba74c786ce4b7afc92ec13d40dfa84d9a25206c865ebb43ad6132ac4adf0694e8c44e43beebd79735443d5fed997a370776322870cd1ab28441d7c2e2ccad02
+  checksum: 10c0/50f75c3446f21ed26c3a3bab351149a1d963e72298056283e5a757e841ea81e65c6249f3d0369b884102abf462a51668c63873f049d86e411becc0a1dd5e1562
   languageName: node
   linkType: hard
 
@@ -13276,7 +13276,7 @@ __metadata:
     "@hookform/resolvers": "npm:^3.6.0"
     "@jest/globals": "npm:^29.7.0"
     "@prisma/client": "npm:^5.15.0"
-    "@privy-io/react-auth": "npm:^1.68.0"
+    "@privy-io/react-auth": "npm:^1.71.0"
     "@privy-io/server-auth": "npm:^1.7.3"
     "@privy-io/wagmi": "npm:^0.2.10"
     "@radix-ui/react-accordion": "npm:^1.1.2"

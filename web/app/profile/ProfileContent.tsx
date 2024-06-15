@@ -36,10 +36,12 @@ export default function ProfileContent() {
           <Entries />
         </div>
       </div>
+      <hr className="!mb-12 !mt-12 border-t border-gray-200" />
       <div className="flex flex-col space-y-2">
         <h2 className="text-2xl font-medium">Submit a PR</h2>
         <SubmitPr />
       </div>
+      <hr className="!mb-12 !mt-12 border-t border-gray-200" />
       <div className="flex flex-col space-y-2">
         <h2 className="text-2xl font-medium">Submissions</h2>
         <Submissions />

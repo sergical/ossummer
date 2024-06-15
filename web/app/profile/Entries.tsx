@@ -13,7 +13,7 @@ export function Entries() {
     return <div>Error: {isError.message}</div>;
   }
 
-  const duration = entries ? MIN_SUBMISSIONS / entries : 4;
+  const duration = entries ? (MIN_SUBMISSIONS / entries) * 2 : 4;
 
   return (
     <div className="relative flex h-[250px] w-full items-center justify-center rounded-xl border border-border">

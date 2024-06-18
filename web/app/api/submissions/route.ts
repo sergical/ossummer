@@ -14,6 +14,9 @@ export async function GET() {
 
   const pullRequests = await prisma.pullRequest.findMany({
     where: { userId: privyUserId },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 
   return NextResponse.json(pullRequests);

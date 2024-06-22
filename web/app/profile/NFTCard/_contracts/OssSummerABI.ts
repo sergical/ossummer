@@ -343,6 +343,13 @@ const abi = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
+  {
+    type: 'function',
+    name: 'isOnAllowlist',
+    inputs: [{ name: 'user', type: 'address', internalType: 'address' }],
+    outputs: [{ name: '', type: 'bool', internalType: 'bool' }],
+    stateMutability: 'view',
+  },
 ] as const;
 
 export default abi;

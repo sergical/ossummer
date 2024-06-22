@@ -19,7 +19,8 @@ export function Entries() {
 
   const duration = entries ? (MIN_SUBMISSIONS / entries) * 2 : 4;
 
-  const allowedToSubmit = entries && entries >= MIN_SUBMISSIONS;
+  // const allowedToSubmit = entries && entries >= MIN_SUBMISSIONS;
+  const allowedToSubmit = true;
 
   return (
     <div className="relative flex h-[250px] w-full items-center justify-center rounded-xl border border-border">

@@ -69,7 +69,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
 
       <CardFooter className="flex justify-end">
         <div className="flex gap-2">
-          <Button asChild variant="outline">
+          <Button asChild variant="ghost">
             <Link target="_blank" href={pr.publicUrl}>
               View PR
             </Link>
@@ -77,6 +77,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
           {pr.state === 'open' && (
             <Button
               disabled={loading}
+              variant="outline"
               type="button"
               onClick={async () => recheckPullRequest(pr.apiUrl)}
             >

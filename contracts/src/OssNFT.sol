@@ -15,6 +15,10 @@ contract OssNFT is ERC721A, Ownable {
         }
     }
 
+    function isOnAllowlist(address user) external view returns (bool) {
+        return allowlist[user];
+    }
+
     function mint() external {
         require(allowlist[msg.sender], "You are not on the allowlist");
         _safeMint(msg.sender, 1);

@@ -1,15 +1,6 @@
-const abi = [
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: 'initialURI',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
+import { Abi } from 'viem';
+
+const abi: Abi = [
   {
     inputs: [
       {
@@ -92,6 +83,6 @@ const abi = [
     stateMutability: 'view',
     type: 'function',
   },
-] as const;
+];
 
 export default abi;

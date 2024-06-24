@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ethers } from 'ethers';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -40,7 +42,6 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Add to whitelist on the contract
     try {
       const tx = await contract.addToAllowlist([address]);
       console.log('tx', tx);

@@ -26,8 +26,10 @@ export default function NFTCard() {
     address: contract.status === 'ready' ? contract.address : undefined,
     abi: contract.abi, // Ensure ABI is correctly referenced
     functionName: 'isOnAllowlist',
-    args: address ? [address] : undefined,
-    enabled: onCorrectNetwork,
+    args: [address ? [address] : []],
+    query: {
+      enabled: onCorrectNetwork,
+    },
   });
 
   const handleWhitelist = async () => {
@@ -61,9 +63,6 @@ export default function NFTCard() {
   const handleCheckEligibility = useCallback(() => {
     console.log('isOnAllowlistData', isOnAllowlistData);
     const isOnAllowlistResult = isOnAllowlistData?.result as unknown as boolean;
-    if (!isOnAllowlistResult) {
-      toast.error('You have not filled all the submissions yet, keep building!');
-    }
     setIsOnAllowlist(isOnAllowlistResult);
   }, [isOnAllowlistData]);
 

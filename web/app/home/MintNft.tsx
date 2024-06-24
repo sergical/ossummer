@@ -76,16 +76,15 @@ export function MintNft() {
             variants={variant2}
             className="flex max-w-[300px] items-start gap-x-2 rounded-lg border border-neutral-300 border-neutral-400/20 bg-white p-4 shadow-[0px_0px_40px_-25px_rgba(0,0,0,0.25)] dark:border-neutral-800 dark:bg-neutral-900"
           >
-            <div className="flex h-6 w-6 shrink-0 rounded-full bg-blue-500">
+            <div className="flex h-[200px] w-[200px] shrink-0 rounded-full bg-blue-500">
               <Image
-                width={32}
-                height={32}
+                width={200}
+                height={200}
                 className="h-full w-full rounded-full object-cover"
-                src="https://avatar.vercel.sh/jane"
+                src="/OssNFT/ossnft.png"
                 alt="jane"
               />
             </div>
-            <div>{/* TODO: Add the NFT image */}</div>
           </motion.div>
         </motion.div>
         <div className="flex w-full flex-col items-start border-t border-neutral-200 p-4 dark:border-neutral-800">

@@ -1,12 +1,12 @@
 import { base, baseSepolia } from 'viem/chains';
 import { generateContractHook } from '@/hooks/contracts';
-import OssSummerABI from './OSSummerABI';
+import OSSummerABI from './OSSummerABI';
 
 /**
  * Returns contract data for the Custom1155 contract.
  */
 export const useOSSummerContract = generateContractHook({
-  abi: OssSummerABI,
+  abi: OSSummerABI,
   [baseSepolia.id]: {
     chain: baseSepolia,
     address: process.env.NEXT_PUBLIC_OSSUMMER_BASE_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`,

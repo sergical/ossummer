@@ -62,21 +62,6 @@ const faqs = [
       },
     ],
   },
-  {
-    section: 'Integration',
-    qa: [
-      {
-        question: 'How do I integrate Magic UI with my existing project?',
-        answer: (
-          <span>
-            Magic UI can be integrated into any React project. Simply install the library, import
-            the components you need, and start using them in your project. Our documentation
-            provides detailed instructions for integration.
-          </span>
-        ),
-      },
-    ],
-  },
 ];
 
 export function FAQ() {

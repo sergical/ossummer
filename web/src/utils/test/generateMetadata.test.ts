@@ -12,7 +12,7 @@ describe('generateMetadata', () => {
   });
 
   const envs = [
-    ['BOAT_DEPLOY_URL', 'boat-deploy-url.com', 'https://boat-deploy-url.com'],
+    ['DEPLOY_URL', 'ossummer-deploy-url.com', 'https://ossummer-deploy-url.com'],
     ['VERCEL_URL', 'vercel-url.com', 'https://vercel-url.com'],
   ];
   describe.each(envs)(

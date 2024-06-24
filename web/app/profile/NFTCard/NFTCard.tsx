@@ -2,33 +2,32 @@
 /* eslint-disable react-perf/jsx-no-new-function-as-prop */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import { useAccount, useSimulateContract } from 'wagmi';
 import { Button } from '@/components/ui/button';
 import { EXPECTED_CHAIN } from '@/constants';
 import { getChainsForEnvironment } from '@/store/supportedChains';
-import { useOssSummerContract } from './_contracts/useOssSummerContract';
+import { APIResponse } from '@/types/api';
+import { useOSSummerContract } from './_contracts/useOSSummerContract';
 
 export default function NFTCard() {
-  const [isEligible, setIsEligible] = useState(false);
+  const [isOnAllowlist, setIsOnAllowlist] = useState(false);
   const [addingToAllowlist, setAddingToAllowlist] = useState(false);
   const { chain: accountChain, address } = useAccount();
   const chain =
     accountChain ?? getChainsForEnvironment().find((envChain) => EXPECTED_CHAIN.id === envChain.id);
 
-  const contract = useOssSummerContract();
+  const contract = useOSSummerContract();
 
   const onCorrectNetwork = chain?.id === EXPECTED_CHAIN.id;
 
   const { data: isOnAllowlistData } = useSimulateContract({
     address: contract.status === 'ready' ? contract.address : undefined,
-    abi: contract.abi,
-    functionName: 'allowlist',
+    abi: contract.abi, // Ensure ABI is correctly referenced
+    functionName: 'isOnAllowlist',
     args: address ? [address] : undefined,
-    query: {
-      enabled: onCorrectNetwork,
-    },
+    enabled: onCorrectNetwork,
   });
 
   const handleWhitelist = async () => {
@@ -37,33 +36,53 @@ export default function NFTCard() {
       const result = await fetch('/api/whitelist', {
         method: 'POST',
         body: JSON.stringify({ address }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      const data = (await result.json()) as { success: boolean };
-      console.log(data);
-      setAddingToAllowlist(false);
+      const data = (await result.json()) as unknown as APIResponse<string>;
+      if (data.success) {
+        toast.success('Successfully added to the allowlist!');
+      } else {
+        toast.error(`Failed to add to the allowlist: ${data.error}`);
+      }
     } catch (error) {
       console.error(error);
+      toast.error('An error occurred while adding to the allowlist.');
     } finally {
       setAddingToAllowlist(false);
     }
   };
 
-  const handleCheckEligibility = () => {
-    const isOnAllowlist = isOnAllowlistData?.result as unknown as boolean;
-    if (!isOnAllowlist) {
+  const handleMint = async () => {
+    console.log('Minting...');
+  };
+
+  const handleCheckEligibility = useCallback(() => {
+    console.log('isOnAllowlistData', isOnAllowlistData);
+    const isOnAllowlistResult = isOnAllowlistData?.result as unknown as boolean;
+    if (!isOnAllowlistResult) {
       toast.error('You have not filled all the submissions yet, keep building!');
     }
-    setIsEligible(isOnAllowlist);
-  };
+    setIsOnAllowlist(isOnAllowlistResult);
+  }, [isOnAllowlistData]);
+
+  useEffect(() => {
+    if (isOnAllowlistData !== undefined) {
+      handleCheckEligibility();
+    }
+  }, [isOnAllowlistData, handleCheckEligibility]);
 
   return (
     <div className="z-50 text-2xl font-bold">
-      {isEligible ? (
+      {isOnAllowlist ? (
+        <Button onClick={handleMint} disabled={addingToAllowlist}>
+          {addingToAllowlist ? 'Minting...' : 'Mint'}
+        </Button>
+      ) : (
         <Button onClick={handleWhitelist} disabled={addingToAllowlist}>
           {addingToAllowlist ? 'Adding to allowlist...' : 'Confirm submissions'}
         </Button>
-      ) : (
-        <Button onClick={handleCheckEligibility}>Check eligibility</Button>
       )}
     </div>
   );

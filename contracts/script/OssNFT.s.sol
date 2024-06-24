@@ -9,10 +9,12 @@ contract OssNFTScript is Script {
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        string memory initialURI = "ipfs://QmWAA8mEDoS9kQfzdW1PdaPwbWKe1JDDMemhNRB3J5nczc";
 
         vm.startBroadcast(deployerPrivateKey);
 
-        OssNFT oss = new OssNFT();
+        OssNFT oss = new OssNFT(initialURI);
+
         vm.stopBroadcast();
         console2.log("OssNFT address: ", address(oss));
     }

@@ -26,6 +26,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@adraffy/ens-normalize@npm:1.10.1":
+  version: 1.10.1
+  resolution: "@adraffy/ens-normalize@npm:1.10.1"
+  checksum: 10c0/fdd647604e8fac6204921888aaf5a6bc65eabf0d2921bc5f93b64d01f4bc33ead167c1445f7de05468d05cd92ac31b74c68d2be840c62b79d73693308f885c06
+  languageName: node
+  linkType: hard
+
 "@alloc/quick-lru@npm:^5.2.0":
   version: 5.2.0
   resolution: "@alloc/quick-lru@npm:5.2.0"
@@ -5038,6 +5045,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:18.15.13":
+  version: 18.15.13
+  resolution: "@types/node@npm:18.15.13"
+  checksum: 10c0/6e5f61c559e60670a7a8fb88e31226ecc18a21be103297ca4cf9848f0a99049dae77f04b7ae677205f2af494f3701b113ba8734f4b636b355477a6534dbb8ada
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^12.12.6":
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
@@ -6167,6 +6181,13 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 10c0/3ff155f8812e4a746fee8ecff1f227d527c4c45655bb1fad6347c3cb58e46190598217551b1500f18542d2bbe5c87120cb6927f5a074a59166fbdd9468f0a299
+  languageName: node
+  linkType: hard
+
+"aes-js@npm:4.0.0-beta.5":
+  version: 4.0.0-beta.5
+  resolution: "aes-js@npm:4.0.0-beta.5"
+  checksum: 10c0/444f4eefa1e602cbc4f2a3c644bc990f93fd982b148425fee17634da510586fc09da940dcf8ace1b2d001453c07ff042e55f7a0482b3cc9372bf1ef75479090c
   languageName: node
   linkType: hard
 
@@ -9040,6 +9061,21 @@ __metadata:
     "@scure/bip32": "npm:1.4.0"
     "@scure/bip39": "npm:1.3.0"
   checksum: 10c0/766939345c39936f32929fae101a91f009f5e28261578d44e7a224dbb70827feebb5135013e81fc39bdcf8d70b321e92b4243670f0947e73add8ae5158717b84
+  languageName: node
+  linkType: hard
+
+"ethers@npm:^6.13.1":
+  version: 6.13.1
+  resolution: "ethers@npm:6.13.1"
+  dependencies:
+    "@adraffy/ens-normalize": "npm:1.10.1"
+    "@noble/curves": "npm:1.2.0"
+    "@noble/hashes": "npm:1.3.2"
+    "@types/node": "npm:18.15.13"
+    aes-js: "npm:4.0.0-beta.5"
+    tslib: "npm:2.4.0"
+    ws: "npm:8.17.1"
+  checksum: 10c0/a5af271c9b51f8f968da7ab011d6956f64541731468557e9204344bc2ff43f16f52e6ed846e2b88479524bf8219cefb960fc4a1ac6f4a9340926142ba39caf90
   languageName: node
   linkType: hard
 
@@ -13328,6 +13364,7 @@ __metadata:
     eslint-plugin-react-perf: "npm:^3.3.1"
     eslint-plugin-relay: "npm:^1.8.3"
     eslint-plugin-simple-import-sort: "npm:^8.0.0"
+    ethers: "npm:^6.13.1"
     framer-motion: "npm:^11.2.10"
     graphql: "npm:14"
     graphql-request: "npm:6"
@@ -16196,6 +16233,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.4.0":
+  version: 2.4.0
+  resolution: "tslib@npm:2.4.0"
+  checksum: 10c0/eb19bda3ae545b03caea6a244b34593468e23d53b26bf8649fbc20fce43e9b21a71127fd6d2b9662c0fe48ee6ff668ead48fd00d3b88b2b716b1c12edae25b5d
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
@@ -17911,6 +17955,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10c0/35b4c2da048b8015c797fd14bcb5a5766216ce65c8a5965616a5440ca7b6c3681ee3cbd0ea0c184a59975556e9d58f2002abf8485a14d11d3371770811050a16
+  languageName: node
+  linkType: hard
+
+"ws@npm:8.17.1":
+  version: 8.17.1
+  resolution: "ws@npm:8.17.1"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/f4a49064afae4500be772abdc2211c8518f39e1c959640457dcee15d4488628620625c783902a52af2dd02f68558da2868fd06e6fd0e67ebcd09e6881b1b5bfe
   languageName: node
   linkType: hard
 

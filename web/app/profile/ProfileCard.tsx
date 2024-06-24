@@ -1,6 +1,7 @@
+/* eslint-disable react-perf/jsx-no-new-function-as-prop */
 import React, { useCallback } from 'react';
 import { Avatar, Name } from '@coinbase/onchainkit/identity';
-import { usePrivy } from '@privy-io/react-auth';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
 import { useRouter } from 'next/navigation';
 import { base } from 'viem/chains';
 import { useAccount, useChainId } from 'wagmi';
@@ -10,8 +11,18 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 export default function ProfileCard() {
   const { logout, linkGithub, user, linkFarcaster } = usePrivy();
-  const { address } = useAccount();
+  const { wallets } = useWallets();
+  const wallet = wallets[0];
+  const privyChainId = wallet?.chainId?.split(':')[1];
   const chainId = useChainId();
+
+  const isMismatched = Number(privyChainId) !== chainId;
+
+  const handleSwitchToRightChain = async () => {
+    await wallet.switchChain(chainId);
+  };
+
+  const { address } = useAccount();
   const router = useRouter();
   const handleLogout = useCallback(() => {
     logout()
@@ -39,7 +50,14 @@ export default function ProfileCard() {
             </div>
           </div>
           <div>
-            <Badge variant="default">{chainId === base.id ? 'Base' : 'Base Sepolia'}</Badge>
+            {isMismatched ? (
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              <Button size="sm" variant="outline" onClick={handleSwitchToRightChain}>
+                Switch to {chainId === base.id ? 'Base' : 'Base Sepolia'}
+              </Button>
+            ) : (
+              <Badge variant="default">{chainId === base.id ? 'Base' : 'Base Sepolia'}</Badge>
+            )}
           </div>
         </div>
       </CardHeader>

@@ -10,13 +10,15 @@ import { toast } from 'sonner';
 import { Confetti } from '@/components/magicui/confetti';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { useEntries } from '@/hooks/useEntries';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { APIResponse } from '@/types/api';
 
 export default function Submission({ pr }: { pr: PullRequest }) {
   const [loading, setLoading] = useState(false);
   const { mutate } = useSubmissions();
+  const { mutate: mutateEntries } = useEntries();
   async function recheckPullRequest(url: string) {
     try {
       setLoading(true);
@@ -31,6 +33,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
         } else {
           toast.success('PR status updated');
           await mutate();
+          await mutateEntries();
           Confetti({});
         }
       } else {
@@ -47,18 +50,26 @@ export default function Submission({ pr }: { pr: PullRequest }) {
       <CardHeader>
         <div className="flex justify-between">
           <h3 className="text-lg font-medium">{pr.title}</h3>
-          <Badge
-            variant={
-              pr.state === 'merged' ? 'success' : pr.state === 'closed' ? 'destructive' : 'default'
-            }
-          >
-            {pr.state}
-          </Badge>
+          <div>
+            <Badge
+              variant={
+                pr.state === 'merged'
+                  ? 'success'
+                  : pr.state === 'closed'
+                  ? 'destructive'
+                  : 'default'
+              }
+            >
+              {pr.state}
+            </Badge>
+          </div>
         </div>
       </CardHeader>
+      <CardContent className="flex-1 p-0" />
+
       <CardFooter className="flex justify-end">
         <div className="flex gap-2">
-          <Button asChild variant="outline">
+          <Button asChild variant="ghost">
             <Link target="_blank" href={pr.publicUrl}>
               View PR
             </Link>
@@ -66,6 +77,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
           {pr.state === 'open' && (
             <Button
               disabled={loading}
+              variant="outline"
               type="button"
               onClick={async () => recheckPullRequest(pr.apiUrl)}
             >

@@ -1,0 +1,15 @@
+{
+  "name": "Open Source Summer Contributor NFT",
+  "description": "This NFT represents outstanding contributions to open-source projects during the Open Source Summer event.",
+  "image": "ipfs://QmRwxcMUseCkvTDL3U2eQhBsqwqpYAiREdmjCzapxkzptW",
+  "attributes": [
+    {
+      "trait_type": "Year",
+      "value": "2024"
+    },
+    {
+      "trait_type": "Contributions",
+      "value": "4"
+    }
+  ]
+}

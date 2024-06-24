@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useEntries } from '@/hooks/useEntries';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { APIResponse } from '@/types/api';
 
@@ -31,6 +32,7 @@ export function SubmitPr() {
   const [loading, setLoading] = useState(false);
   const { user, linkGithub } = usePrivy();
   const { mutate } = useSubmissions();
+  const { mutate: mutateEntries } = useEntries();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -65,6 +67,7 @@ export function SubmitPr() {
       if (resBody.success) {
         toast.success('PR submitted successfully');
         await mutate();
+        await mutateEntries();
         Confetti({});
         form.reset();
       } else {

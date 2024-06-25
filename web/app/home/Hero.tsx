@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useLogin, usePrivy } from '@privy-io/react-auth';
 import { motion, useInView } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import RetroGrid from '@/components/magicui/retro-grid';
@@ -52,9 +53,9 @@ export function Hero() {
         <div className="container z-10 flex flex-col">
           <div className="mt-20 grid grid-cols-1">
             <div className="flex flex-col items-center gap-6 pb-8 text-center">
-              <motion.h1
+              <motion.div
                 ref={fadeInRef}
-                className="text-balance bg-gradient-to-br from-black from-30% to-black/60 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl"
+                className="z-10 m-auto max-w-[1000px]"
                 animate={fadeInInView ? 'animate' : 'initial'}
                 variants={fadeUpVariants}
                 initial={false}
@@ -65,8 +66,8 @@ export function Hero() {
                   type: 'spring',
                 }}
               >
-                Open Source <br /> Summer <br />
-              </motion.h1>
+                <Image src="/logo-text.png" alt="Ossummer logo" width={2229} height={609} />
+              </motion.div>
 
               <motion.p
                 className="text-balance text-lg tracking-tight text-gray-400 md:text-xl"

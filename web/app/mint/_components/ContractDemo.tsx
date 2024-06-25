@@ -63,9 +63,7 @@ export default function MintContractDemo() {
   // Collection metadata might not have `name` field, so we fallback to shortened address
   const collectionNameOrAddress =
     collectionName ??
-    (contract.status === 'ready'
-      ? `Collection: ${getName({ address: contract.address, showAddress: true })}`
-      : '');
+    (contract.status === 'ready' ? `Collection: ${getName({ address: contract.address })}` : '');
 
   if (isLoadingCollectionMetadata) {
     return (

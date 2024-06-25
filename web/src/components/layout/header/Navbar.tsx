@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import Image from 'next/image';
 import NextLink from 'next/link';
 
 import PrivyLogin from './PrivyLogin';
@@ -42,16 +43,17 @@ export function NavbarTitle() {
   return (
     <div className="flex h-8 items-center justify-start gap-4">
       <NextLink href="/" passHref className="relative h-8 w-8" aria-label="Home page">
-        <div className="absolute size-8 rounded-full bg-foreground" />
+        <div className="size-8 rounded-full bg-[#2151F6] p-1">
+          <Image
+            src="/logo.png"
+            alt="Ossummer logo"
+            width={32}
+            height={32}
+            className="rounded-full"
+          />
+        </div>
       </NextLink>
-      <NextLink
-        href="/"
-        passHref
-        className="font-robotoMono text-center text-xl font-medium no-underline"
-        aria-label="build-onchain-apps Github repository"
-      >
-        OSSUMMER
-      </NextLink>
+      <div className="w-[172px]" />
     </div>
   );
 }

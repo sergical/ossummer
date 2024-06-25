@@ -153,7 +153,7 @@ export function SubmitPrs() {
         <div className="flex w-full flex-col items-start border-t border-neutral-200 p-4 dark:border-neutral-800">
           <h2 className="text-xl font-semibold">Submit PRs</h2>
           <p className="text-base font-normal text-neutral-500 dark:text-neutral-400">
-            Track your contributions to Open Soruce
+            Track your contributions to Open Source
           </p>
         </div>
       </motion.div>

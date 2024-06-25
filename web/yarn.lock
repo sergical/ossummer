@@ -1703,23 +1703,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coinbase/onchainkit@npm:0.22.4":
-  version: 0.22.4
-  resolution: "@coinbase/onchainkit@npm:0.22.4"
+"@coinbase/onchainkit@npm:0.22.5":
+  version: 0.22.5
+  resolution: "@coinbase/onchainkit@npm:0.22.5"
   dependencies:
-    "@tanstack/react-query": "npm:^5"
     clsx: "npm:^2.1.1"
     graphql: "npm:^14 || ^15 || ^16"
     graphql-request: "npm:^6.1.0"
     permissionless: "npm:^0.1.29"
     tailwind-merge: "npm:^2.3.0"
   peerDependencies:
+    "@tanstack/react-query": ^5
     "@xmtp/frames-validator": ^0.6.0
     react: ^18
     react-dom: ^18
     viem: ^2
     wagmi: ^2
-  checksum: 10c0/c583c7409139969612fc730ee5bc0cc543659955c43bfaa2d208b1c42fc47a4345d19e33107e4c4c966faa51daa02a8cd543b2ccb6e48b1a61666fbb21514e85
+  checksum: 10c0/abdab730f689902e2dbaec102178dd1dce1abb362ac6cb44d975f05b5a5151a6a3aeb89a9e69a6e383d78af4a07f058555ec7d1f8d223bd7016cad10fa744d73
   languageName: node
   linkType: hard
 
@@ -4679,24 +4679,6 @@ __metadata:
   version: 5.29.0
   resolution: "@tanstack/query-core@npm:5.29.0"
   checksum: 10c0/ec90801c7234a551e347656b02c6e4dcc448722c466cc42eaf03bb69ac535c2e26a74f7189c21cf836cacf41851f30d17beae0f9478017b6220b612e1803eddb
-  languageName: node
-  linkType: hard
-
-"@tanstack/query-core@npm:5.45.0":
-  version: 5.45.0
-  resolution: "@tanstack/query-core@npm:5.45.0"
-  checksum: 10c0/b1adb0e44a6294f8fc63d1f3915e657e29799ae761012a49430f2694f9fd4f7041984949f61d412ad43e5aaba3ea880ab89b3d2c309cb2860a2913029e9062e9
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query@npm:^5":
-  version: 5.45.1
-  resolution: "@tanstack/react-query@npm:5.45.1"
-  dependencies:
-    "@tanstack/query-core": "npm:5.45.0"
-  peerDependencies:
-    react: ^18.0.0
-  checksum: 10c0/39968d90bfe365ea0a1bff64caaf065fc8ea3304ae450a055265e235e461bd82bbe3dc9182d32062ecb48c45e2d679ee87909489bde9b9e7b09ed7c41e81fd93
   languageName: node
   linkType: hard
 
@@ -13334,7 +13316,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.5"
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@coinbase/onchainkit": "npm:0.22.4"
+    "@coinbase/onchainkit": "npm:0.22.5"
     "@coinbase/wallet-sdk": "npm:4.0.0"
     "@farcaster/hub-nodejs": "npm:^0.11.9"
     "@hookform/resolvers": "npm:^3.6.0"

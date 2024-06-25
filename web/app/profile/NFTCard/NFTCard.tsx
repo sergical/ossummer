@@ -4,8 +4,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { useWallets } from '@privy-io/react-auth';
-
 import { toast } from 'sonner';
 import { TransactionExecutionError } from 'viem';
 import {
@@ -33,10 +31,7 @@ export default function NFTCard() {
   const [isOnAllowlist, setIsOnAllowlist] = useState(false);
   const [addingToAllowlist, setAddingToAllowlist] = useState(false);
   const { chain: accountChain, address, connector, isConnected } = useAccount();
-  const { wallets } = useWallets();
-  const wallet = wallets[0];
-  const privyChainId = wallet?.chainId;
-  console.log('privyChainId', privyChainId);
+
   console.log('connector', connector);
   console.log('isConnected', isConnected);
   const chainId = useChainId();

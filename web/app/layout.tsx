@@ -1,4 +1,5 @@
 import './global.css';
+
 import { Analytics } from '@vercel/analytics/react';
 import { Inter as FontSans } from 'next/font/google';
 

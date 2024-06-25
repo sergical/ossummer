@@ -47,6 +47,7 @@ function OnchainProviders({ children }: Props) {
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={wagmiConfig}>
           <OnchainKitProvider
+            apiKey={process.env.NEXT_PUBLIC_ONCHAIN_API_KEY as string}
             chain={
               ENVIRONMENT === 'localhost' || ENVIRONMENT === 'development' ? baseSepolia : base
             }

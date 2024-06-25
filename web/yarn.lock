@@ -1703,20 +1703,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coinbase/onchainkit@npm:0.16.10":
-  version: 0.16.10
-  resolution: "@coinbase/onchainkit@npm:0.16.10"
+"@coinbase/onchainkit@npm:0.22.5":
+  version: 0.22.5
+  resolution: "@coinbase/onchainkit@npm:0.22.5"
+  dependencies:
+    clsx: "npm:^2.1.1"
+    graphql: "npm:^14 || ^15 || ^16"
+    graphql-request: "npm:^6.1.0"
+    permissionless: "npm:^0.1.29"
+    tailwind-merge: "npm:^2.3.0"
   peerDependencies:
-    "@coinbase/wallet-sdk": ^4
     "@tanstack/react-query": ^5
     "@xmtp/frames-validator": ^0.6.0
-    graphql: ^14 || ^15 || ^16
-    graphql-request: ^6.1.0
     react: ^18
     react-dom: ^18
     viem: ^2
     wagmi: ^2
-  checksum: 10c0/4cacee8f7ed3c59f3234f6db6a2d8ff5491dbce435128053c3ef712da110a528c74ad337b67ea2c54d8578f323c3e419cd994c863f950b32fde970dee8065e6e
+  checksum: 10c0/abdab730f689902e2dbaec102178dd1dce1abb362ac6cb44d975f05b5a5151a6a3aeb89a9e69a6e383d78af4a07f058555ec7d1f8d223bd7016cad10fa744d73
   languageName: node
   linkType: hard
 
@@ -9835,7 +9838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-request@npm:6":
+"graphql-request@npm:6, graphql-request@npm:^6.1.0":
   version: 6.1.0
   resolution: "graphql-request@npm:6.1.0"
   dependencies:
@@ -9853,6 +9856,13 @@ __metadata:
   dependencies:
     iterall: "npm:^1.2.2"
   checksum: 10c0/7f8085d4d8f4cd20bde0a2c327d21a0beaf2d0539775dc4fc093d2193c51f3c268ab43d11d539ce0ef26ffea227de7c7bd47788636bd66c5a944c95ad0870727
+  languageName: node
+  linkType: hard
+
+"graphql@npm:^14 || ^15 || ^16":
+  version: 16.9.0
+  resolution: "graphql@npm:16.9.0"
+  checksum: 10c0/a8850f077ff767377237d1f8b1da2ec70aeb7623cdf1dfc9e1c7ae93accc0c8149c85abe68923be9871a2934b1bce5a2496f846d4d56e1cfb03eaaa7ddba9b6a
   languageName: node
   linkType: hard
 
@@ -13306,7 +13316,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.5"
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@coinbase/onchainkit": "npm:0.16.10"
+    "@coinbase/onchainkit": "npm:0.22.5"
     "@coinbase/wallet-sdk": "npm:4.0.0"
     "@farcaster/hub-nodejs": "npm:^0.11.9"
     "@hookform/resolvers": "npm:^3.6.0"
@@ -13603,6 +13613,15 @@ __metadata:
   peerDependencies:
     viem: ^2.9.17
   checksum: 10c0/b8e9966edbcba03148d58b362538aeb2b6641e25c34aa36c38543c2b7ccdcb585b55b6cc75ec2bf40e92a3d076b68d700839a916df3cbe0ff4690fe162995e90
+  languageName: node
+  linkType: hard
+
+"permissionless@npm:^0.1.29":
+  version: 0.1.31
+  resolution: "permissionless@npm:0.1.31"
+  peerDependencies:
+    viem: ^2.9.17
+  checksum: 10c0/0f9f87f758d663fc1fd6ced3cc62ba85960b88155f9867afb78190dfb6ef00daefcb3aa5e0ce2f40358c3c04e959dde9ac674873205c0f8d3126b3560ab97a85
   languageName: node
   linkType: hard
 

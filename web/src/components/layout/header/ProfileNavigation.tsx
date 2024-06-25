@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 
-import { Avatar, Name } from '@coinbase/onchainkit/identity';
+import { Address, Avatar } from '@coinbase/onchainkit/identity';
 import { useLogout } from '@privy-io/react-auth';
 import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
@@ -30,15 +30,13 @@ export default function ProfileNavigation() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Account</Button>
+        <Button variant="outline">
+          <Avatar address={address} className="!mr-2 h-5 w-5" />
+          <Address address={address} />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>
-          <div className="flex items-center gap-2">
-            <Avatar address={address} className="!mr-2 h-5 w-5" />
-            <Name address={address} />
-          </div>
-        </DropdownMenuLabel>
+        <DropdownMenuLabel>Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem

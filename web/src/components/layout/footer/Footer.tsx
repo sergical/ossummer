@@ -24,13 +24,7 @@ export default function Footer() {
     <footer className="container flex flex-col gap-y-5 rounded-lg px-7 py-5 md:px-10">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2">
-          <Image
-            width={50}
-            height={50}
-            className="h-5 w-5"
-            src="https://magicui.design/icon.png"
-            alt="MagicUI Logo"
-          />
+          <Image width={50} height={50} className="h-5 w-5" src="/logo.png" alt="OSSummer Logo" />
           <h2 className="text-lg font-bold text-neutral-900 dark:text-white">OSSUMMER</h2>
         </div>
 

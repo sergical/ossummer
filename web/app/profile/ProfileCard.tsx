@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback } from 'react';
-import { Avatar, Name } from '@coinbase/onchainkit/identity';
+import { Address, Avatar, Name } from '@coinbase/onchainkit/identity';
 import { usePrivy } from '@privy-io/react-auth';
 import { useRouter } from 'next/navigation';
 import { base } from 'viem/chains';
@@ -39,7 +39,7 @@ export default function ProfileCard() {
               <b>
                 <Name address={address} />
               </b>
-              <Name address={address} />
+              <Address address={address} />
             </div>
           </div>
           <div>

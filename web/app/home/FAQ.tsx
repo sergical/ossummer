@@ -45,6 +45,34 @@ const faqs = [
           </span>
         ),
       },
+      {
+        question: 'How do I make sure I get quality PRs?',
+        answer: (
+          <span>
+            In the future we can add a quality gate to project submissions. Contributions come in
+            differnt forms, it&apos;s hard to make sure they are all meeting your expected quality.
+            To help, here&apos;s a link to{' '}
+            <a
+              href="https://github.com/sergical/ossummer/blob/main/.github/CONTRIBUTING_TEMPLATE.md"
+              className="font-medium text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CONTRIBUTING.md
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://github.com/sergical/ossummer/blob/main/CODE_OF_CONDUCT.md"
+              className="font-medium text-primary underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CODE_OF_CONDUCT.md
+            </a>{' '}
+            to add to your project.
+          </span>
+        ),
+      },
     ],
   },
   {

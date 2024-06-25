@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Cross1Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 
-import { NavbarTitle } from './Navbar';
+import { NavbarLink, NavbarTitle, links } from './Navbar';
 import PrivyLogin from './PrivyLogin';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -31,6 +31,13 @@ export default function NavbarMobile() {
           </div>
         </div>
         <div>
+          <ul className="flex flex-col gap-4">
+            {links.map((item) => (
+              <NavbarLink key={item.label} {...item}>
+                {item.label}
+              </NavbarLink>
+            ))}
+          </ul>
           <div className="mx-2 mt-4">
             <PrivyLogin />
           </div>

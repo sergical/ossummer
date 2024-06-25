@@ -7,12 +7,12 @@ import { ThemeToggle } from './ThemeToggle';
 
 export const links = [
   {
-    label: 'Explore',
-    href: '/explore',
+    label: 'Projects',
+    href: '/projects',
   },
   {
-    label: 'Leaderboard',
-    href: '/leaderboard',
+    label: 'Contributors',
+    href: '/contributors',
   },
 ];
 
@@ -76,7 +76,7 @@ function Navbar() {
           ))}
         </ul>
         <div className="flex items-center justify-start gap-8">
-          <ul className="hidden items-center justify-start gap-8 md:flex">
+          <ul className="hidden w-[172px] items-center justify-end gap-8 md:flex">
             <li className="flex">
               <PrivyLogin />
             </li>

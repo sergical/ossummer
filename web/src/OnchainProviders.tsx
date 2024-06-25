@@ -30,7 +30,7 @@ function OnchainProviders({ children }: Props) {
           walletList: ['coinbase_wallet'],
           theme: theme === 'light' ? 'light' : 'dark',
           accentColor: '#676FFF',
-          logo: 'https://magicui.design/icon.png',
+          logo: `/logo.png`,
         },
         externalWallets: {
           coinbaseWallet: {

@@ -1,3 +1,6 @@
+'use client';
+
+import { Avatar } from '@coinbase/onchainkit/identity';
 import dynamic from 'next/dynamic';
 import Footer from '@/components/layout/footer/Footer';
 import Header from '@/components/layout/header/Header';
@@ -13,6 +16,8 @@ export default function HomePage() {
   return (
     <main>
       <Header />
+      <Avatar address="0x1234567890abcdef1234567890abcdef12345678" />
+
       <Hero />
       <Partners />
       <FeaturedRepos />

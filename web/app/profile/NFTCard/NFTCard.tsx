@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { useWallets } from '@privy-io/react-auth';
-import { MintSteps } from 'app/mint/_components/ContractDemo';
+
 import { toast } from 'sonner';
 import { TransactionExecutionError } from 'viem';
 import {
@@ -20,6 +20,13 @@ import { EXPECTED_CHAIN } from '@/constants';
 import { getChainsForEnvironment } from '@/store/supportedChains';
 import { APIResponse } from '@/types/api';
 import { useOSSummerContract } from './_contracts/useOSSummerContract';
+
+export enum MintSteps {
+  START_MINT_STEP,
+  MINT_PROCESSING_STEP,
+  OUT_OF_GAS_STEP,
+  MINT_COMPLETE_STEP,
+}
 
 export default function NFTCard() {
   const [mintStep, setMintStep] = useState(MintSteps.START_MINT_STEP);
@@ -161,7 +168,7 @@ export default function NFTCard() {
   };
 
   return (
-    <div className="z-50 text-2xl font-bold">
+    <div className="z-10 text-2xl font-bold">
       {isOnAllowlist ? (
         mintFlowMarkup()
       ) : (

@@ -4,6 +4,17 @@ import NextLink from 'next/link';
 import PrivyLogin from './PrivyLogin';
 import { ThemeToggle } from './ThemeToggle';
 
+export const links = [
+  {
+    label: 'Explore',
+    href: '/explore',
+  },
+  {
+    label: 'Leaderboard',
+    href: '/leaderboard',
+  },
+];
+
 export function NavbarLink({
   href,
   children,
@@ -55,6 +66,13 @@ function Navbar() {
     >
       <div className="flex h-8 grow items-center justify-between gap-4">
         <NavbarTitle />
+        <ul className="flex items-center justify-start gap-8">
+          {links.map((link) => (
+            <li className="flex" key={link.href}>
+              <NavbarLink href={link.href}>{link.label}</NavbarLink>
+            </li>
+          ))}
+        </ul>
         <div className="flex items-center justify-start gap-8">
           <ul className="hidden items-center justify-start gap-8 md:flex">
             <li className="flex">

@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
-import { Cross1Icon, GitHubLogoIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
-import AccountConnect from './AccountConnect';
-import { NavbarLink, NavbarTitle } from './Navbar';
+import { Cross1Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+
+import { NavbarTitle } from './Navbar';
+import PrivyLogin from './PrivyLogin';
 import { ThemeToggle } from './ThemeToggle';
 
 export default function NavbarMobile() {
@@ -30,18 +31,8 @@ export default function NavbarMobile() {
           </div>
         </div>
         <div>
-          <ul className="mx-2 flex flex-col gap-4">
-            <li className="flex">
-              <NavbarLink href="https://github.com/coinbase/build-onchain-apps" target="_blank">
-                <GitHubLogoIcon width="24" height="24" />
-              </NavbarLink>
-            </li>
-            <li className="flex">
-              <NavbarLink href="/#get-started">Get Started</NavbarLink>
-            </li>
-          </ul>
           <div className="mx-2 mt-4">
-            <AccountConnect />
+            <PrivyLogin />
           </div>
           <div className="mx-2 mt-4">
             <ThemeToggle />

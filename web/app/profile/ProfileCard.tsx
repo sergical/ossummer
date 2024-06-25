@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react-perf/jsx-no-new-function-as-prop */
 import React, { useCallback } from 'react';
 import { Avatar, Name } from '@coinbase/onchainkit/identity';
@@ -46,7 +48,7 @@ export default function ProfileCard() {
               <b>
                 <Name address={address} />
               </b>
-              <Name address={address} showAddress />
+              <Name address={address} />
             </div>
           </div>
           <div>

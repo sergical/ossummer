@@ -1,6 +1,7 @@
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import Link from 'next/link';
+import { links } from '../header/Navbar';
 
 type Icon = {
   icon: JSX.Element;
@@ -9,15 +10,10 @@ type Icon = {
 
 const icons: Icon[] = [{ icon: <GitHubLogoIcon />, url: 'https://github.com/sergical/ossummer' }];
 
-type LinkType = {
-  text: string;
-  url: string;
-};
-
-const links: LinkType[] = [
-  { text: 'Buy me coffee', url: '/buy-me-coffee' },
-  { text: 'ShipCasts', url: '/shipcasts' },
-];
+// const links: LinkType[] = [
+//   { text: 'Buy me coffee', url: '/buy-me-coffee' },
+//   { text: 'ShipCasts', url: '/shipcasts' },
+// ];
 
 export default function Footer() {
   return (
@@ -51,7 +47,7 @@ export default function Footer() {
               key={index}
               className="text-[15px]/normal font-medium text-neutral-400 transition-all duration-100 ease-linear hover:text-neutral-900 hover:underline hover:underline-offset-4 dark:font-medium dark:text-neutral-400 hover:dark:text-neutral-100"
             >
-              <Link href={link.url}>{link.text}</Link>
+              <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
         </ul>

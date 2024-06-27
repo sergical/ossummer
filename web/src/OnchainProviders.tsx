@@ -25,6 +25,7 @@ function OnchainProviders({ children }: Props) {
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_ID as string}
       config={{
+        defaultChain: baseSepolia,
         // Customize Privy's appearance in your app
         appearance: {
           walletList: ['coinbase_wallet'],

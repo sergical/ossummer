@@ -8,10 +8,10 @@ import { base } from 'viem/chains';
 import { useAccount, useChainId } from 'wagmi';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardFooter, CardHeader } from '@/components/ui/card';
 
 export default function ProfileCard() {
-  const { logout, linkGithub, user, linkFarcaster } = usePrivy();
+  const { logout } = usePrivy();
 
   const chainId = useChainId();
 
@@ -47,30 +47,7 @@ export default function ProfileCard() {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-col space-y-2">
-          <div>
-            Github:{' '}
-            {user?.github ? (
-              user.github.username
-            ) : (
-              <Button variant="link" onClick={linkGithub}>
-                Link Github
-              </Button>
-            )}
-          </div>
-          <div>
-            Farcaster:{' '}
-            {user?.farcaster ? (
-              user.farcaster.username
-            ) : (
-              <Button variant="link" onClick={linkFarcaster}>
-                Link Farcaster
-              </Button>
-            )}
-          </div>
-        </div>
-      </CardContent>
+
       <CardFooter className="flex justify-end">
         <Button variant="outline" onClick={handleLogout}>
           Logout

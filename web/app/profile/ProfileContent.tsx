@@ -6,6 +6,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { useAccount } from 'wagmi';
 import { Entries } from './Entries';
 import ProfileCard from './ProfileCard';
+import { Social } from './Social';
 import Submissions from './Submissions';
 import { SubmitPr } from './SubmitPr';
 
@@ -45,7 +46,11 @@ export default function ProfileContent() {
         <h3 className="text-lg font-medium">Submissions</h3>
         <Submissions />
       </div>
-      <div className="flex flex-col space-y-2" />
+      <hr className="!mb-4 !mt-12 border-t border-border" />
+      <div className="flex flex-col space-y-2">
+        <h2 className="text-2xl font-medium">Social</h2>
+        <Social />
+      </div>
     </div>
   );
 }

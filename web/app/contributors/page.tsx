@@ -7,7 +7,7 @@ import ContributorsList from './components/ContributorsList';
 import ContributorsHero from './components/Hero';
 
 export const metadata = generateMetadata({
-  title: 'Contributors - OSS',
+  title: 'Contributors | Oper Source Summer',
   description: 'Explore the contributors that are participating in Open Source Summer. ',
   images: 'themes.png',
   pathname: 'contributors',

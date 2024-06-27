@@ -44,7 +44,7 @@ export function SubmitPr() {
 
   if (!githubUser) {
     return (
-      <div>
+      <div className="space-y-4">
         <p>You need to link your GitHub account to submit a PR</p>
         <Button onClick={linkGithub}>Link GitHub</Button>
       </div>

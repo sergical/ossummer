@@ -26,7 +26,7 @@ export default function Contributor({ contributor }: { contributor: User }) {
           </Link>
           <div className="text-sm text-muted-foreground">{contributor.github?.name}</div>
         </div>
-        <p className="text-sm font-medium">
+        <p className="flex items-center gap-2 text-sm font-medium">
           Contributions:{' '}
           {isLoading ? <SpinnerIcon className="h-4 w-4" /> : isError ? 'Error' : contributions}
         </p>

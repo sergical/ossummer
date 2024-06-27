@@ -9,7 +9,7 @@ function ContributorsHero() {
       <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-foreground">
         Contributors
       </p>
-      <p className="z-10 whitespace-pre-wrap text-center text-lg font-medium tracking-tighter text-foreground">
+      <p className="z-10 whitespace-pre-wrap text-center text-lg text-foreground">
         Explore the contributors who are helping us build more open source software onchain
       </p>
       <DotPattern

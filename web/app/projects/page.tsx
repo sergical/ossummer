@@ -5,7 +5,7 @@ import Main from '@/components/layout/Main';
 import { generateMetadata } from '@/utils/generateMetadata';
 
 export const metadata = generateMetadata({
-  title: 'Projects - OSS',
+  title: 'Projects | Oper Source Summer',
   description: 'Explore the projects that are participating in Open Source Summer. ',
   images: 'themes.png',
   pathname: 'projects',

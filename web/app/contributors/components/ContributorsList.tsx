@@ -9,8 +9,8 @@ export default function ContributorsList() {
   const { contributors, isLoading, isError } = useContributors();
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error: {isError.message}</div>}
+      {isLoading && <div className="text-center">Loading...</div>}
+      {isError && <div className="text-center">Error: {isError.message}</div>}
       {contributors && (
         <ul className="mx-auto max-w-[500px] space-y-4">
           {contributors.map((contributor) => (

@@ -6,7 +6,7 @@ export const useEntries = () => {
 
   return {
     entries: data,
-    isLoading: !error && !data,
+    isLoading: !error && data === undefined,
     isError: error,
     mutate,
   };

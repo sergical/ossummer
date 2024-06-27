@@ -9,7 +9,7 @@ export function Partners() {
       <div className="py-14">
         <div className="container mx-auto px-4 md:px-8">
           <h3 className="text-center text-sm font-semibold uppercase text-muted-foreground">
-            In partnership with
+            *Hopefully* in partnership with
           </h3>
           <div className="relative mt-6">
             <Marquee className="max-w-full [--duration:40s]">

@@ -46,6 +46,13 @@ export default function ProfileNavigation() {
           >
             Profile
           </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              router.push('/earnings');
+            }}
+          >
+            Earnings
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

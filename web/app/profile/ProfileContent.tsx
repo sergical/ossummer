@@ -39,13 +39,17 @@ export default function ProfileContent() {
       </div>
       <hr className="!mb-4 !mt-12 border-t border-border" />
       <div className="flex flex-col space-y-2">
-        <h2 className="text-2xl font-medium">Submit a PR</h2>
+        <h2 className="text-2xl font-medium">Builder zone</h2>
+        <p className="text-sm text-muted-foreground">
+          Add PRs here, once you have 4 that are merged, you can claim your prize above
+        </p>
         <SubmitPr />
       </div>
       <div className="flex flex-col space-y-2">
         <h3 className="text-lg font-medium">Submissions</h3>
         <Submissions />
       </div>
+
       <hr className="!mb-4 !mt-12 border-t border-border" />
       <div className="flex flex-col space-y-2">
         <h2 className="text-2xl font-medium">Social</h2>

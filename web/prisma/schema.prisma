@@ -19,3 +19,22 @@ model PullRequest {
   author             String
   state              String   // open, closed, merged
 }
+
+model Project {
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  name               String
+  ownerId            String
+  apiUrl             String   @unique
+  publicUrl          String   @unique
+}
+
+model Donation {
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  amount             Int
+  targetId           String
+  targetType         String
+}

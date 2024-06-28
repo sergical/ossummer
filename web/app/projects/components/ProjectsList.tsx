@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { ProjectCard } from 'app/earnings/ProjectCard';
-
 import { useProjects } from '@/hooks/useProjects';
 
 export function ProjectsList() {

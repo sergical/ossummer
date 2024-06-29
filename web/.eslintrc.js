@@ -14,7 +14,7 @@ module.exports = {
     'airbnb/rules/react-a11y',
     'plugin:relay/strict',
     'next/core-web-vitals',
-    "prettier"
+    'prettier',
   ],
   rules: {
     'react/destructuring-assignment': 'off',
@@ -135,46 +135,43 @@ module.exports = {
     'import/order': [
       'error',
       {
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
         },
-        'groups': [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type'
-        ],
-        "pathGroups": [
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+        pathGroups: [
           {
-            "pattern": "react",
-            "group": "external",
-            "position": "before"
+            pattern: 'react',
+            group: 'external',
+            position: 'before',
           },
           {
-            "pattern": "@/**",
-            "group": "external",
-            "position": "after"
-          }
+            pattern: '@/**',
+            group: 'external',
+            position: 'after',
+          },
         ],
-        "pathGroupsExcludedImportTypes": ["react"]
-      }
+        pathGroupsExcludedImportTypes: ['react'],
+      },
     ],
 
     // We prefer labels to be associated with inputs
-    'jsx-a11y/label-has-associated-control': ['error', {
-      'required': {
-        'some': ['nesting', 'id']
-      }
-    }],
-    'jsx-a11y/label-has-for': ['error', {
-      'required': {
-        'some': ['nesting', 'id']
-      }
-    }]
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
   },
 };

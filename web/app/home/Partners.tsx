@@ -1,7 +1,18 @@
 import Image from 'next/image';
 import Marquee from '@/components/magicui/marquee';
 
-const companies = ['Coinbase', 'Stripe', 'Shopify'];
+const companies = [
+  'Coinbase',
+  'Shopify',
+  {
+    name: 'Devfolio',
+    src: '/sponsors/devfolio.png',
+  },
+  {
+    name: 'Farcaster',
+    src: '/sponsors/farcaster.png',
+  },
+];
 
 export function Partners() {
   return (
@@ -19,9 +30,13 @@ export function Partners() {
                   height={40}
                   // eslint-disable-next-line react/no-array-index-key
                   key={idx}
-                  src={`https://cdn.magicui.design/companies/${logo}.svg`}
-                  className="h-10 w-28 object-cover dark:brightness-0 dark:invert"
-                  alt={logo}
+                  src={
+                    typeof logo === 'string'
+                      ? `https://cdn.magicui.design/companies/${logo}.svg`
+                      : logo.src
+                  }
+                  className="h-10 w-28 object-contain dark:brightness-0 dark:invert"
+                  alt={typeof logo === 'string' ? logo : logo.name}
                 />
               ))}
             </Marquee>

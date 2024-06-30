@@ -6,16 +6,15 @@ import { PrivyProvider } from '@privy-io/react-auth';
 import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
-import { base, baseSepolia } from 'viem/chains';
+
 import { createWagmiConfig } from '@/store/createWagmiConfig';
+import { EXPECTED_CHAIN } from './constants';
 
 type Props = { children: ReactNode };
 
 const queryClient = new QueryClient();
 
 const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string;
-
-const ENVIRONMENT = process.env.ENVIRONMENT as string;
 
 const wagmiConfig = createWagmiConfig(rpcUrl);
 
@@ -25,7 +24,7 @@ function OnchainProviders({ children }: Props) {
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_ID as string}
       config={{
-        defaultChain: baseSepolia,
+        defaultChain: EXPECTED_CHAIN,
         // Customize Privy's appearance in your app
         appearance: {
           walletList: ['coinbase_wallet'],
@@ -49,9 +48,7 @@ function OnchainProviders({ children }: Props) {
         <WagmiProvider config={wagmiConfig}>
           <OnchainKitProvider
             apiKey={process.env.NEXT_PUBLIC_ONCHAIN_API_KEY as string}
-            chain={
-              ENVIRONMENT === 'localhost' || ENVIRONMENT === 'development' ? baseSepolia : base
-            }
+            chain={EXPECTED_CHAIN}
           >
             {children}
           </OnchainKitProvider>

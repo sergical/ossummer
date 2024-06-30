@@ -1,4 +1,4 @@
-import { baseSepolia } from 'viem/chains';
+import { base, baseSepolia } from 'viem/chains';
 import { generateContractHook } from '@/hooks/contracts';
 import OSSummerABI from './OSSummerABI';
 
@@ -11,9 +11,9 @@ export const useOSSummerContract = generateContractHook({
     chain: baseSepolia,
     address: process.env.NEXT_PUBLIC_OSSUMMER_BASE_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`,
   },
-  // TODO: add base contract once it's ready
-  // [base.id]: {
-  //   chain: base,
-  //   address: process.env.NEXT_PUBLIC_OSSUMMER_BASE_CONTRACT_ADDRESS as `0x${string}`,
-  // },
+
+  [base.id]: {
+    chain: base,
+    address: process.env.NEXT_PUBLIC_OSSUMMER_BASE_CONTRACT_ADDRESS as `0x${string}`,
+  },
 });

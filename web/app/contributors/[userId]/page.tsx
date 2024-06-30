@@ -1,8 +1,8 @@
 import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import { Metadata, ResolvingMetadata } from 'next';
 import { DEFAULT_URL } from '@/constants';
-import { buildPrivyUserId } from '@/lib/privy';
 import { privy } from '@/server/privy';
+import { buildPrivyUserId } from '@/utils/privy';
 
 export async function generateMetadata(
   { params }: { params: { userId: string } },

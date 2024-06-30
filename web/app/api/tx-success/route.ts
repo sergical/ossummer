@@ -2,7 +2,7 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_URL, EXPECTED_CHAIN } from '@/constants';
-import { getEtherscanLink } from '@/lib/getEtherscanLink';
+import { getEtherscanLink } from '@/utils/getEtherscanLink';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();

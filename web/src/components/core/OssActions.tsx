@@ -16,7 +16,7 @@ import {
   useWaitForTransactionReceipt,
 } from 'wagmi';
 import { DONATION_VALUE } from '@/constants';
-import { getEtherscanLink } from '@/lib/getEtherscanLink';
+import { getEtherscanLink } from '@/utils/getEtherscanLink';
 import { Button } from '../ui/button';
 
 export function OssActions({ walletAddress }: { walletAddress?: string }) {

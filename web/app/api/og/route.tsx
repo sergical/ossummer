@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { DEFAULT_URL, EXPECTED_CHAIN } from '@/constants';
-import { getEtherscanLink } from '@/lib/getEtherscanLink';
 import { prisma } from '@/server/prisma';
+import { getEtherscanLink } from '@/utils/getEtherscanLink';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

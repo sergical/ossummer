@@ -1,12 +1,12 @@
-import { baseSepolia, Chain } from 'viem/chains';
+import { base, baseSepolia, Chain } from 'viem/chains';
 import { Environment, getCurrentEnvironment } from './environment';
 
 // The list of supported Chains for a given environment
 export const SUPPORTED_CHAINS: Record<Environment, [Chain, ...Chain[]]> = {
   [Environment.localhost]: [baseSepolia],
   [Environment.development]: [baseSepolia],
-  [Environment.staging]: [baseSepolia], // TODO: remove baseSepolia and add base
-  [Environment.production]: [baseSepolia], // TODO: remove baseSepolia and add base
+  [Environment.staging]: [baseSepolia, base],
+  [Environment.production]: [baseSepolia, base],
 };
 
 /**

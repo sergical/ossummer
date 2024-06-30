@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useSwitchChain } from 'wagmi';
-// TODO: use supported contracts from hook to populate selector
 import { EXPECTED_CHAIN } from '@/constants';
 
 function SwitchNetwork() {

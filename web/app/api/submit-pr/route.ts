@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json<APIResponse<string>>({
       success: true,
-      data: 'PR created successfully!',
+      data: 'PR added successfully!',
     });
   } catch (error) {
     return NextResponse.json<APIResponse<string>>({

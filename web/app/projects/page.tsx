@@ -3,20 +3,23 @@ import Header from '@/components/layout/header/Header';
 import Main from '@/components/layout/Main';
 
 import { generateMetadata } from '@/utils/generateMetadata';
+import { ProjectsHero } from './components/ProjectsHero';
+import { ProjectsList } from './components/ProjectsList';
 
 export const metadata = generateMetadata({
-  title: 'Projects | Oper Source Summer',
-  description: 'Explore the projects that are participating in Open Source Summer. ',
+  title: 'Contributors | Oper Source Summer',
+  description: 'Explore the contributors that are participating in Open Source Summer. ',
   images: 'themes.png',
-  pathname: 'projects',
+  pathname: 'contributors',
 });
 
-export default function ProjectsPage() {
+export default function ContributorsPage() {
   return (
     <>
       <Header />
       <Main>
-        <h1>Projects</h1>
+        <ProjectsHero />
+        <ProjectsList />
       </Main>
       <Footer />
     </>

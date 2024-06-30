@@ -1,6 +1,9 @@
+import { parseEther } from 'viem';
 import { baseSepolia, base } from 'viem/chains';
 
 export const MIN_SUBMISSIONS = 4;
+
+export const DONATION_VALUE = parseEther('0.001');
 
 const shouldBeBased =
   process.env.ENVIRONMENT === 'production' || process.env.ENVIRONMENT === 'staging';

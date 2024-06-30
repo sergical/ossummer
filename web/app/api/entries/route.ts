@@ -15,7 +15,5 @@ export async function GET() {
     where: { userId: privyUserId, state: 'merged' },
   });
 
-  console.log(pullRequests);
-
   return Response.json(pullRequests);
 }

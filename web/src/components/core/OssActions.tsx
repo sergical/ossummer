@@ -40,7 +40,11 @@ export function OssActions({ walletAddress }: { walletAddress?: string }) {
   }, [error]);
 
   if (!isConnected) {
-    return <Button onClick={login}>Sign in</Button>;
+    return (
+      <Button onClick={login} variant="outline">
+        Sign in to donate
+      </Button>
+    );
   }
 
   if (isOwner) {

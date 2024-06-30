@@ -5,8 +5,8 @@ import { Environment, getCurrentEnvironment } from './environment';
 export const SUPPORTED_CHAINS: Record<Environment, [Chain, ...Chain[]]> = {
   [Environment.localhost]: [baseSepolia],
   [Environment.development]: [baseSepolia],
-  [Environment.staging]: [baseSepolia, base],
-  [Environment.production]: [baseSepolia, base],
+  [Environment.staging]: [base],
+  [Environment.production]: [base],
 };
 
 /**
@@ -18,6 +18,7 @@ export function getChainsForEnvironment(env?: Environment) {
   if (!env) {
     env = getCurrentEnvironment();
   }
+
   return SUPPORTED_CHAINS[env];
 }
 

@@ -177,6 +177,10 @@ export default function NFTCard() {
     }
   };
 
+  if (!onCorrectNetwork) {
+    return <div>Not on correct network</div>;
+  }
+
   return (
     <div className="z-10 text-2xl font-bold">
       {hasMinted || isOnAllowlist ? (

@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const githubUser = searchParams.get('githubUser');
-  console.log(githubUser);
+
   try {
     const response = await fetch(`https://api.github.com/users/${githubUser}/repos`, {
       headers: {
@@ -15,8 +15,6 @@ export async function GET(request: NextRequest) {
         'X-GitHub-Api-Version': '2022-11-28',
       },
     });
-
-    console.log(response);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');

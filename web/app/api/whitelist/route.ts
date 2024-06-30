@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     try {
       const tx = await contract.addToAllowlist([address]);
-      console.log('tx', tx);
+
       await tx.wait();
 
       return NextResponse.json<APIResponse<string>>({

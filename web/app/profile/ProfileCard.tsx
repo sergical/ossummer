@@ -2,18 +2,24 @@
 
 import React, { useCallback } from 'react';
 import { Address, Avatar, Name } from '@coinbase/onchainkit/identity';
-import { usePrivy } from '@privy-io/react-auth';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
+
 import { useRouter } from 'next/navigation';
 import { base } from 'viem/chains';
 import { useAccount, useChainId } from 'wagmi';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardFooter, CardHeader } from '@/components/ui/card';
+import { EXPECTED_CHAIN } from '@/constants';
 
 export default function ProfileCard() {
   const { logout } = usePrivy();
+  const { wallets } = useWallets();
+  const wallet = wallets[0];
 
   const chainId = useChainId();
+
+  const onCorrectNetwork = chainId === EXPECTED_CHAIN.id;
 
   const { address } = useAccount();
   const router = useRouter();
@@ -43,7 +49,17 @@ export default function ProfileCard() {
             </div>
           </div>
           <div>
-            <Badge variant="default">{chainId === base.id ? 'Base' : 'Base Sepolia'}</Badge>
+            {onCorrectNetwork ? (
+              <Badge variant="default">{chainId === base.id ? 'Base' : 'Base Sepolia'}</Badge>
+            ) : (
+              <Button
+                variant="outline"
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                onClick={async () => wallet?.switchChain(EXPECTED_CHAIN.id)}
+              >
+                Switch Network
+              </Button>
+            )}
           </div>
         </div>
       </CardHeader>

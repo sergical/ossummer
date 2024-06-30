@@ -13,7 +13,7 @@ export default function Contributor({ contributor }: { contributor: User }) {
   const walletAddress = contributor.wallet?.address;
 
   const { contributions, isLoading, isError } = useContributions(contributor.id);
-  console.log(contributor.id);
+
   return (
     <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-border p-4">
       <div className="w-full space-y-2">
@@ -34,12 +34,14 @@ export default function Contributor({ contributor }: { contributor: User }) {
             shareObjectType="contributors"
           />
         </div>
-        <p className="flex items-center gap-2 text-sm font-medium">
-          Contributions:{' '}
-          {isLoading ? <SpinnerIcon className="h-4 w-4" /> : isError ? 'Error' : contributions}
-        </p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="flex items-center gap-2 text-sm font-medium">
+            Contributions:{' '}
+            {isLoading ? <SpinnerIcon className="h-4 w-4" /> : isError ? 'Error' : contributions}
+          </p>
+          <OssActions walletAddress={walletAddress} />
+        </div>
       </div>
-      <OssActions walletAddress={walletAddress} />
     </div>
   );
 }

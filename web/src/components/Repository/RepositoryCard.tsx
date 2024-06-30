@@ -18,10 +18,9 @@ export function RepositoryCard({
   walletAddress?: string;
   projectId?: string;
 }) {
-  console.log(projectId);
   return (
     <Card className="flex flex-col">
-      <CardHeader className="flex flex-1 flex-row items-center justify-between gap-2">
+      <CardHeader className="flex flex-1 flex-row justify-between gap-2">
         <div>
           <CardTitle>{repo.full_name}</CardTitle>
           <CardDescription>{repo.description}</CardDescription>

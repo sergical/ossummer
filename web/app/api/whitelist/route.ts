@@ -3,6 +3,7 @@
 import { ethers } from 'ethers';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { shouldBeBased } from '@/constants';
 import { prisma } from '@/server/prisma';
 import { privy } from '@/server/privy';
 import { APIResponse } from '@/types/api';
@@ -11,7 +12,9 @@ import abi from './abi';
 const provider = new ethers.JsonRpcProvider(process.env.NEXT_PRIVATE_RPC_URL);
 const signer = new ethers.Wallet(process.env.NEXT_PRIVATE_PRIVATE_KEY as string, provider);
 
-const contractAddress = process.env.NEXT_PUBLIC_OSSUMMER_BASE_SEPOLIA_CONTRACT_ADDRESS as string;
+const contractAddress = shouldBeBased
+  ? (process.env.NEXT_PUBLIC_OSSUMMER_BASE_CONTRACT_ADDRESS as string)
+  : (process.env.NEXT_PUBLIC_OSSUMMER_BASE_SEPOLIA_CONTRACT_ADDRESS as string);
 const contract = new ethers.Contract(contractAddress, abi, signer);
 
 export async function POST(request: NextRequest) {

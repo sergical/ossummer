@@ -5,7 +5,7 @@ export const MIN_SUBMISSIONS = 4;
 
 export const DONATION_VALUE = parseEther('0.001');
 
-const shouldBeBased =
+export const shouldBeBased =
   process.env.NEXT_PUBLIC_ENVIRONMENT === 'production' ||
   process.env.NEXT_PUBLIC_ENVIRONMENT === 'staging';
 export const EXPECTED_CHAIN = shouldBeBased ? base : baseSepolia;

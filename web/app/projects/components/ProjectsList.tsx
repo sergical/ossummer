@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { useProjects } from '@/hooks/useProjects';
 import { ProjectCard } from 'app/earnings/ProjectCard';
+import { useProjects } from '@/hooks/useProjects';
 
 export function ProjectsList() {
   const { projects, isLoading, isError } = useProjects();

@@ -3,6 +3,7 @@
 import React from 'react';
 import { Address, Avatar, Name } from '@coinbase/onchainkit/identity';
 
+import { formatEther } from 'viem';
 import { base } from 'viem/chains';
 import { useAccount, useBalance, useChainId } from 'wagmi';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +14,7 @@ export default function EarningsCard() {
   const chainId = useChainId();
 
   const { address } = useAccount();
-  const { data: balance } = useBalance({ address, query: { enabled: !!address } });
+  const { data: balance } = useBalance({ address, chainId, query: { enabled: !!address } });
 
   if (!address) return null;
 
@@ -39,7 +40,7 @@ export default function EarningsCard() {
       <CardContent>
         <div className="flex flex-col space-y-2">
           <h3 className="text-lg font-medium">
-            Balance: {Number(balance?.value ?? 0).toFixed(5)}
+            Balance: {Number(formatEther(balance?.value ?? BigInt('0'))).toFixed(5)}
             {balance?.symbol}
           </h3>
           <p className="text-sm text-muted-foreground">

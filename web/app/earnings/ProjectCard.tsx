@@ -21,5 +21,11 @@ export function ProjectCard({ project }: { project: Project }) {
   }, [project.apiUrl]);
 
   if (isLoading || !projectInfo) return <LoadingCard />;
-  return <RepositoryCard repo={projectInfo} />;
+  return (
+    <RepositoryCard
+      repo={projectInfo}
+      walletAddress={project.walletAddress}
+      projectId={project.id}
+    />
+  );
 }

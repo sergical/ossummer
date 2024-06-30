@@ -9,7 +9,7 @@ export function createWagmiConfig(rpcUrl: string) {
   const baseSepoliaUrl = rpcUrl.replace(/\/v1\/(.+?)\//, '/v1/base-sepolia/');
 
   return createConfig({
-    chains: [baseSepolia],
+    chains: [baseSepolia, base],
     connectors: [
       coinbaseWallet({
         appName: 'buildonchainapps',

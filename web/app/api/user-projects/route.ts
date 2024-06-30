@@ -55,6 +55,13 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    if (!privyUser.wallet?.address) {
+      return NextResponse.json<APIResponse<string>>({
+        success: false,
+        error: 'User does not have a wallet',
+      });
+    }
+
     const url = new URL(projectUrl);
     const pathSegments = url.pathname.split('/');
     const owner = pathSegments[1];
@@ -93,6 +100,7 @@ export async function POST(request: NextRequest) {
         publicUrl: projectInfoJson.html_url,
         name: projectInfoJson.name,
         ownerId: privyUserId,
+        walletAddress: privyUser.wallet.address,
       },
     });
 
@@ -101,6 +109,7 @@ export async function POST(request: NextRequest) {
       data: 'Project added successfully!',
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json<APIResponse<string>>({
       success: false,
       error: 'Failed to verify privy access token or create PR.',

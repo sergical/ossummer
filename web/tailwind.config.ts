@@ -25,6 +25,9 @@ const config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-2': 'linear-gradient(270deg, #f55925 0%, #D75986 100%)',
+        ossummer:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(250, 184, 81, 0.33) 33%, #FC80F5 66%, rgba(250, 60, 13, 0.66) 100%)',
+        'ossummer-text': 'linear-gradient(71.42deg, #FAB851 12.58%, #FC80F5 50%, #FA3C0D 87.42%)',
       },
       gridTemplateColumns: {
         // Coffee column grid
@@ -96,6 +99,10 @@ const config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        '4xl': '32px',
+      },
+      boxShadow: {
+        ossummer: '0px 0px 24px 0px rgba(0, 0, 0, 0.08)',
       },
       animation: {
         backgroundPositionSpin: 'background-position-spin 3000ms infinite alternate',

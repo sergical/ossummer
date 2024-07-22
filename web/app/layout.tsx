@@ -37,6 +37,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           fontSans.variable,
         )}
       >
+        <svg width="0" height="0" className="hidden">
+          <defs>
+            <linearGradient id="ossummer-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="12.58%" stopColor="#FAB851" />
+              <stop offset="50%" stopColor="#FC80F5" />
+              <stop offset="87.42%" stopColor="#FA3C0D" />
+            </linearGradient>
+          </defs>
+        </svg>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import MainCta from '@/components/main-cta';
 import { Button } from '@/components/ui/button';
+import { BackgroundAnimated } from './BackgroundAnimated';
 
 export function Hero() {
   return (
-    <section id="hero" className="rounded-4xl m-4 bg-slate-300 ">
-      <div className="relative flex h-full flex-col justify-center py-24 lg:min-h-[720px]">
+    <section id="hero" className="relative m-4 overflow-hidden rounded-4xl bg-[#F2F2F2]">
+      <BackgroundAnimated />
+      <div className="relative flex h-full flex-col justify-center py-36 lg:min-h-[720px]">
         <div className="container z-10 flex flex-col gap-4">
           <h1 className="text-4xl font-bold">Empower open source</h1>
           <p className="text-lg">

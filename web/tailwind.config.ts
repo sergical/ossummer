@@ -26,7 +26,7 @@ const config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-2': 'linear-gradient(270deg, #f55925 0%, #D75986 100%)',
         ossummer:
-          'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(250, 184, 81, 0.33) 33%, #FC80F5 66%, rgba(250, 60, 13, 0.66) 100%)',
+          'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(250, 184, 81, 0.1089) 33%, rgba(252, 128, 245, 0.33) 66%, rgba(250, 60, 13, 0.2178) 100%)',
         'ossummer-text': 'linear-gradient(71.42deg, #FAB851 12.58%, #FC80F5 50%, #FA3C0D 87.42%)',
       },
       gridTemplateColumns: {
@@ -112,6 +112,9 @@ const config = {
         'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'float-orange': 'floatOrange 20s ease-in-out infinite',
+        'float-purple': 'floatPurple 25s ease-in-out infinite',
+        'float-yellow': 'floatYellow 30s ease-in-out infinite',
       },
       keyframes: {
         grid: {
@@ -142,6 +145,57 @@ const config = {
         'background-position-spin': {
           '0%': { backgroundPosition: 'top center' },
           '100%': { backgroundPosition: 'bottom center' },
+        },
+        floatOrange: {
+          '0%, 100%': {
+            transform: 'translate(70vw, 100%) rotate(-30.09deg)',
+            width: '30vw',
+            height: '40%',
+          },
+          '33%': {
+            transform: 'translate(50vw, 50%) rotate(30.09deg)',
+            width: '40vw',
+            height: '50%',
+          },
+          '66%': {
+            transform: 'translate(10vw, 300%) rotate(-30.09deg)',
+            width: '20vw',
+            height: '20%',
+          },
+        },
+        floatPurple: {
+          '0%, 100%': {
+            transform: 'translate(-5vw, 10px) rotate(-33.04deg)',
+            width: '15vw',
+            height: '70%',
+          },
+          '33%': {
+            transform: 'translate(35vw, -10px) rotate(-13.04deg)',
+            width: '15vw',
+            height: '70%',
+          },
+          '66%': {
+            transform: 'translate(60vw, -30%) rotate(-70.04deg)',
+            width: '15vw',
+            height: '100%',
+          },
+        },
+        floatYellow: {
+          '0%, 100%': {
+            transform: 'translate(50vw, 300%) rotate(70deg)',
+            width: '15vw',
+            height: '20%',
+          },
+          '33%': {
+            transform: 'translate(0vw, 50%) rotate(-10deg)',
+            width: '30vw',
+            height: '70%',
+          },
+          '66%': {
+            transform: 'translate(70vw, 90%) rotate(-10deg)',
+            width: '30vw',
+            height: '50%',
+          },
         },
       },
     },

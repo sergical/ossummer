@@ -87,7 +87,7 @@ const faqItems: FAQItem[] = [
 
 export function FAQ() {
   return (
-    <div className=" bg-ossummer ">
+    <div className="bg-ossummer">
       <section id="faq">
         <div className="py-14">
           <div className="container mx-auto px-4 md:px-8">

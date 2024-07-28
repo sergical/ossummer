@@ -1,12 +1,13 @@
 import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import { Metadata, ResolvingMetadata } from 'next';
 import { DEFAULT_URL } from '@/constants';
-import { prisma } from '@/server/prisma';
+import { createClient } from '@/utils/supabase/server';
 
 export async function generateMetadata(
   { params }: { params: { projectId: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const supabase = createClient();
   // read route params
   const projectId = params.projectId;
   if (!projectId) {
@@ -14,11 +15,11 @@ export async function generateMetadata(
       title: 'Projects',
     };
   }
-  const project = await prisma.project.findUnique({
-    where: {
-      id: projectId,
-    },
-  });
+  const { data: project } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('id', projectId)
+    .single();
 
   if (!project) {
     return {
@@ -29,7 +30,7 @@ export async function generateMetadata(
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images ?? [];
 
-  const walletAddress = project.walletAddress;
+  const walletAddress = project.wallet_address;
 
   const frameMetadata = getFrameMetadata({
     buttons: [

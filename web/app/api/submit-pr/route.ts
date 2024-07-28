@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/server/prisma';
+
 import { privy } from '@/server/privy';
 import { APIResponse } from '@/types/api';
 import { PullRequest } from '@/types/github';
+import { createClient } from '@/utils/supabase/server';
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient();
   const { pullRequestUrl } = (await request.json()) as {
     pullRequestUrl: string;
   };
@@ -55,9 +57,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if the pull request already exists using findFirst
-    const existingPullRequest = await prisma.pullRequest.findFirst({
-      where: { apiUrl: pullRequestInfoJson.url },
-    });
+    const existingPullRequest = await supabase
+      .from('pull_requests')
+      .select('*')
+      .eq('api_url', pullRequestInfoJson.url);
 
     if (existingPullRequest) {
       return NextResponse.json<APIResponse<string>>({
@@ -66,15 +69,13 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    await prisma.pullRequest.create({
-      data: {
-        apiUrl: pullRequestInfoJson.url,
-        publicUrl: pullRequestInfoJson.html_url,
-        title: pullRequestInfoJson.title,
-        userId: privyUserId,
-        author: pullRequestInfoJson.user.login,
-        state: pullRequestInfoJson.merged ? 'merged' : pullRequestInfoJson.state,
-      },
+    await supabase.from('pull_requests').insert({
+      api_url: pullRequestInfoJson.url,
+      public_url: pullRequestInfoJson.html_url,
+      title: pullRequestInfoJson.title,
+      user_id: privyUserId,
+      author: pullRequestInfoJson.user.login,
+      state: pullRequestInfoJson.merged ? 'merged' : pullRequestInfoJson.state,
     });
 
     return NextResponse.json<APIResponse<string>>({

@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/server/prisma';
+
 import { privy } from '@/server/privy';
 import { APIResponse } from '@/types/api';
 import { Repository } from '@/types/github';
+import { createClient } from '@/utils/supabase/server';
 
 export async function GET() {
+  const supabase = createClient();
   const privyAccessToken = cookies().get('privy-token');
   if (!privyAccessToken) {
     return NextResponse.json<APIResponse<string>>({
@@ -18,9 +20,7 @@ export async function GET() {
     const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
     const privyUserId = verifiedClaims.userId;
 
-    const projects = await prisma.project.findMany({
-      where: { ownerId: privyUserId },
-    });
+    const projects = await supabase.from('projects').select('*').eq('owner_id', privyUserId);
     return Response.json(projects);
   } catch (error) {
     return NextResponse.json<APIResponse<string>>({
@@ -31,6 +31,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient();
   const { projectUrl } = (await request.json()) as {
     projectUrl: string;
   };
@@ -83,9 +84,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const existingProject = await prisma.project.findFirst({
-      where: { apiUrl: projectInfoJson.url },
-    });
+    const existingProject = await supabase
+      .from('projects')
+      .select('*')
+      .eq('api_url', projectInfoJson.url);
 
     if (existingProject) {
       return NextResponse.json<APIResponse<string>>({
@@ -94,14 +96,12 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    await prisma.project.create({
-      data: {
-        apiUrl: projectInfoJson.url,
-        publicUrl: projectInfoJson.html_url,
-        name: projectInfoJson.name,
-        ownerId: privyUserId,
-        walletAddress: privyUser.wallet.address,
-      },
+    await supabase.from('projects').insert({
+      api_url: projectInfoJson.url,
+      public_url: projectInfoJson.html_url,
+      name: projectInfoJson.name,
+      owner_id: privyUserId,
+      wallet_address: privyUser.wallet.address,
     });
 
     return NextResponse.json<APIResponse<string>>({

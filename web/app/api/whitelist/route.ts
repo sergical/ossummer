@@ -4,9 +4,10 @@ import { ethers } from 'ethers';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { shouldBeBased } from '@/constants';
-import { prisma } from '@/server/prisma';
+
 import { privy } from '@/server/privy';
 import { APIResponse } from '@/types/api';
+import { createClient } from '@/utils/supabase/server';
 import abi from './abi';
 
 const provider = new ethers.JsonRpcProvider(process.env.NEXT_PRIVATE_RPC_URL);
@@ -18,6 +19,7 @@ const contractAddress = shouldBeBased
 const contract = new ethers.Contract(contractAddress, abi, signer);
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient();
   const { address } = (await request.json()) as {
     address: `0x${string}`;
   };
@@ -34,11 +36,12 @@ export async function POST(request: NextRequest) {
     const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
     const privyUserId = verifiedClaims.userId;
 
-    const pullRequests = await prisma.pullRequest.count({
-      where: { userId: privyUserId, state: 'merged' },
-    });
+    const { data: pullRequests } = await supabase
+      .from('pull_requests')
+      .select('*')
+      .eq('user_id', privyUserId);
 
-    if (pullRequests < 4) {
+    if (pullRequests && pullRequests?.length < 4) {
       return NextResponse.json<APIResponse<string>>({
         success: false,
         error: 'You need to merge at least 4 pull requests to be whitelisted.',

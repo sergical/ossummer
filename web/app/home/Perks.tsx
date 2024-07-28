@@ -30,7 +30,7 @@ export function Perks() {
         />
       </div>
       <p className="text-center text-sm text-muted-foreground">
-        Free t-shirt at the start, more rewards with additional donations
+        More information on the perks coming soon!
       </p>
     </div>
   );

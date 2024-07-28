@@ -22,8 +22,8 @@ const faqItems: FAQItem[] = [
         >
           Hacktoberfest
         </a>
-        , but the prize is an NFT. We will have other ones in the future, happy to collaborate with
-        you if you&apos;re interested in participating.
+        , but onchain. We will have more information in the future, happy to collaborate with you if
+        you&apos;re interested in participating.
       </span>
     ),
   },
@@ -31,10 +31,6 @@ const faqItems: FAQItem[] = [
     question: 'How can I get started with OSSummer?',
     answer:
       'Explore the projects featured here, create PRs, submit them on your profile page and mint your NFT!',
-  },
-  {
-    question: 'How can I get my project added to Open Source Summer?',
-    answer: 'You can add an ossummer topic to your GitHub repository.',
   },
   {
     question: 'How do I make sure I get quality PRs?',

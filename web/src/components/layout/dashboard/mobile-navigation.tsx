@@ -4,42 +4,26 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { cn } from '@/lib/utils';
-import LoginButton from './login-button';
+import { LogoutButton } from './logout-button';
 
-export function Navigation() {
+export function MobileNavigation({ navItems }: { navItems: { href: string; label: string }[] }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className="container fixed left-0 right-0 top-6 z-50 flex justify-center px-4 lg:top-8">
+    <header className="fixed left-0 right-0 top-6 z-50 flex justify-center px-4 lg:hidden">
       <div
         className={cn(
           isOpen && '!rounded-b-none !border-b-0',
-          'flex w-full items-center justify-between rounded-lg border border-black/10 bg-white/50 px-6 py-3 backdrop-blur-lg',
+          'flex w-full max-w-7xl items-center justify-between rounded-lg border border-black/10 bg-white/50 px-6 py-3 backdrop-blur-lg',
         )}
       >
-        <div className="flex items-center gap-2">
-          <Link href="/">
-            <Image src="/logo-text.png" alt="OS Summer Logo" width={162} height={40} />
-          </Link>
-        </div>
-        <nav className="hidden items-center gap-4 lg:flex">
-          <Link href="/projects" className="text-sm font-bold underline-offset-4 hover:underline">
-            Projects
-          </Link>
-          <Link
-            href="/contributors"
-            className="text-sm font-bold underline-offset-4 hover:underline"
-          >
-            Contributors
-          </Link>
-          <LoginButton />
-        </nav>
-        <button className="lg:hidden" onClick={toggleMenu} aria-label="Toggle menu" type="button">
+        <Link href="/">
+          <Image src="/logo-text.png" alt="OS Summer Logo" width={162} height={40} />
+        </Link>
+        <button onClick={toggleMenu} aria-label="Toggle menu" type="button">
           <motion.div
             animate={isOpen ? 'open' : 'closed'}
             className="flex h-6 w-6 flex-col items-center justify-center"
@@ -78,13 +62,12 @@ export function Navigation() {
             className="absolute left-0 right-0 top-full mx-4 overflow-hidden rounded-b-lg border border-black/10 bg-white/50 p-4 shadow-lg backdrop-blur-lg"
           >
             <nav className="flex flex-col items-center justify-center gap-4 p-4">
-              <Link href="/projects" className="text-sm font-bold">
-                Projects
-              </Link>
-              <Link href="/contributors" className="text-sm font-bold">
-                Contributors
-              </Link>
-              <LoginButton />
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href} className="text-sm font-bold">
+                  {item.label}
+                </Link>
+              ))}
+              <LogoutButton />
             </nav>
           </motion.div>
         )}

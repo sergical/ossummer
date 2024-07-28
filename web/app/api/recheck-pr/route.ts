@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/server/prisma';
+
 import { privy } from '@/server/privy';
 import { APIResponse } from '@/types/api';
 import { PullRequest } from '@/types/github';
+import { createClient } from '@/utils/supabase/server';
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient();
   const { url } = (await request.json()) as {
     url: string;
   };
@@ -47,9 +49,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if the pull request already exists using findFirst
-    const existingPullRequest = await prisma.pullRequest.findFirst({
-      where: { apiUrl: pullRequestInfoJson.url },
-    });
+    const { data: existingPullRequest, error } = await supabase
+      .from('pull_requests')
+      .select('*')
+      .eq('api_url', pullRequestInfoJson.url)
+      .single();
+    if (error) {
+      return NextResponse.json<APIResponse<string>>({
+        success: false,
+        error: 'Failed to find pull request.',
+      });
+    }
 
     const pullRequestState = pullRequestInfoJson.merged ? 'merged' : pullRequestInfoJson.state;
     if (pullRequestState === existingPullRequest?.state) {
@@ -59,10 +69,10 @@ export async function POST(request: NextRequest) {
       });
     }
     if (existingPullRequest && existingPullRequest.state !== pullRequestState) {
-      await prisma.pullRequest.update({
-        where: { apiUrl: pullRequestInfoJson.url },
-        data: { state: pullRequestState },
-      });
+      await supabase
+        .from('pull_requests')
+        .update({ state: pullRequestState })
+        .eq('api_url', pullRequestInfoJson.url);
     }
 
     return NextResponse.json<APIResponse<string>>({

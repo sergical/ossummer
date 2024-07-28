@@ -12,10 +12,10 @@ function ColorChangingHeading({ text, color }: ColorChangingHeadingProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll({
     target: headingRef,
-    offset: ['end end', 'start start'],
+    offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0.7, 0.9, 1], [0.04, 0.8, 0.04]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 1], [0.04, 0.06, 1, 1]);
 
   return (
     <motion.h1

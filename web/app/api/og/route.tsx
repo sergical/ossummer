@@ -1,18 +1,23 @@
 import { ImageResponse } from 'next/og';
 import { DEFAULT_URL, EXPECTED_CHAIN } from '@/constants';
-import { prisma } from '@/server/prisma';
+
 import { getEtherscanLink } from '@/utils/getEtherscanLink';
+import { createClient } from '@/utils/supabase/server';
 
 export async function GET(request: Request) {
+  const supabase = createClient();
   const { searchParams } = new URL(request.url);
   const username = searchParams.get('username');
   const projectId = searchParams.get('projectId');
   const tx = searchParams.get('tx');
-  const project = await prisma.project.findUnique({
-    where: {
-      id: projectId ?? '',
-    },
-  });
+  const { data: project, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('id', projectId ?? '')
+    .single();
+  if (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
 
   const title = username
     ? `Support ${username} on Open Source Summer!`

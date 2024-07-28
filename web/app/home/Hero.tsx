@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import MainCta from '@/components/main-cta';
+
 import { Button } from '@/components/ui/button';
 import { BackgroundAnimated } from './BackgroundAnimated';
 
@@ -16,7 +16,9 @@ export function Hero() {
             Receive rewards for contributing to the future of open source
           </p>
           <div className="flex flex-row gap-4">
-            <MainCta />
+            <Button asChild>
+              <Link href="/projects/add">Add project</Link>
+            </Button>
             <Button variant="outline" asChild>
               <Link href="/projects">Explore projects</Link>
             </Button>

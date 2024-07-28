@@ -17,17 +17,23 @@ function ColorTransitionImage({ src, width, height, alt, className }: ColorTrans
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: imageRef,
-    offset: ['end end', 'start 240px'],
+    offset: ['start end', 'end start'],
   });
 
   const filter = useTransform(
     scrollYProgress,
-    [0.7, 0.9, 1],
-    ['grayscale(100%)', 'grayscale(0%)', 'grayscale(100%)'],
+    [0, 0.3, 0.5, 1],
+    ['grayscale(96%)', 'grayscale(94%)', 'grayscale(0%)', 'grayscale(0%)'],
   );
 
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 1], [0.04, 0.06, 1, 1]);
+
   return (
-    <motion.div ref={imageRef} style={{ filter }} className={cn('overflow-hidden', className)}>
+    <motion.div
+      ref={imageRef}
+      style={{ filter, opacity }}
+      className={cn('overflow-hidden', className)}
+    >
       <Image
         src={src}
         alt={alt}

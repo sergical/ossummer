@@ -1,138 +1,107 @@
 /* eslint-disable react/no-array-index-key */
 'use client';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import ColorChangingHeading from '@/components/color-changing-header';
+import Footer from '@/components/layout/footer/Footer';
+type FAQItem = {
+  question: string;
+  answer: React.ReactNode;
+};
 
-const faqs = [
+const faqItems: FAQItem[] = [
   {
-    section: 'General',
-    qa: [
-      {
-        question: 'What is OSSummer?',
-        answer: (
-          <span>
-            OSSummer is a way to get more developers onchain. Similar to{' '}
-            <a href="https://hacktoberfest.com">Hacktoberfest</a>, but the prize is an NFT. We will
-            have other ones in the future, happy to collaborate with you if you&apos;re interested
-            in participating.
-          </span>
-        ),
-      },
-      {
-        question: 'How can I get started with OSSummer?',
-        answer: (
-          <span>
-            Explore the projects featured here, create PRs, submit them on your profile page and
-            mint your NFT!
-          </span>
-        ),
-      },
-    ],
+    question: 'What is OSSummer?',
+    answer: (
+      <span>
+        OSSummer is a way to get more developers onchain. Similar to{' '}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://hacktoberfest.com/"
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          Hacktoberfest
+        </a>
+        , but onchain. We will have more information in the future, happy to collaborate with you if
+        you&apos;re interested in participating.
+      </span>
+    ),
   },
   {
-    section: 'Maintainers',
-    qa: [
-      {
-        question: 'How can I get my projecct added to Open Source Summer?',
-        answer: (
-          <span>
-            You can add an <code>ossummer</code> topic to your GitHub repository.
-          </span>
-        ),
-      },
-      {
-        question: 'How do I make sure I get quality PRs?',
-        answer: (
-          <span>
-            In the future we can add a quality gate to project submissions. Contributions come in
-            differnt forms, it&apos;s hard to make sure they are all meeting your expected quality.
-            To help, here&apos;s a link to{' '}
-            <a
-              href="https://github.com/sergical/ossummer/blob/main/.github/CONTRIBUTING_TEMPLATE.md"
-              className="font-medium text-primary underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CONTRIBUTING.md
-            </a>{' '}
-            and{' '}
-            <a
-              href="https://github.com/sergical/ossummer/blob/main/CODE_OF_CONDUCT.md"
-              className="font-medium text-primary underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CODE_OF_CONDUCT.md
-            </a>{' '}
-            to add to your project.
-          </span>
-        ),
-      },
-    ],
+    question: 'How can I get started with OSSummer?',
+    answer:
+      'Explore the projects featured here, create PRs, submit them on your profile page and mint your NFT!',
   },
   {
-    section: 'Partners',
-    qa: [
-      {
-        question: 'I want to support the project and have stuff for the community',
-        answer: (
-          <span>
-            Absolutely! The prize is an NFT. Once I figure out all the addresses, it&apos;s really
-            easy to offer something to someone based on them having that NFT. Think Shopify Coupon
-            Code or idk, something even cooler!
-          </span>
-        ),
-      },
-    ],
+    question: 'How do I make sure I get quality PRs?',
+    answer: (
+      <span>
+        In the future we can add a quality gate to project submissions. Contributions come in
+        differnt forms, it&apos;s hard to make sure they are all meeting your expected quality. To
+        help, here&apos;s a link to{' '}
+        <a
+          href="https://github.com/sergical/ossummer/blob/main/.github/CONTRIBUTING_TEMPLATE.md"
+          className="font-medium text-primary underline underline-offset-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CONTRIBUTING.md
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://github.com/sergical/ossummer/blob/main/CODE_OF_CONDUCT.md"
+          className="font-medium text-primary underline underline-offset-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CODE_OF_CONDUCT.md
+        </a>{' '}
+        to add to your project.
+      </span>
+    ),
+  },
+  {
+    question: 'I want to support the project and have stuff for the community',
+    answer:
+      "Absolutely! The prize is an NFT. Once I figure out all the addresses, it's really easy to offer something to someone based on them having that NFT. Think Shopify Coupon Code or idk, something even cooler!",
+  },
+  {
+    question: 'Still have questions?',
+    answer: (
+      <span>
+        Email me at{' '}
+        <a
+          href="mailto:s@serg.tech"
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          s@serg.tech
+        </a>
+      </span>
+    ),
   },
 ];
 
 export function FAQ() {
   return (
-    <section id="faq">
-      <div className="py-14">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">FAQs</h2>
+    <div className="bg-ossummer">
+      <section id="faq">
+        <div className="py-14">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="mx-auto text-center">
+              <ColorChangingHeading text="FAQs" color="text-foreground" />
+            </div>
+            <div className="container mx-auto my-12 max-w-[564px] space-y-12">
+              {faqItems.map((faqItem, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <h3 className="text-2xl font-bold">{faqItem.question}</h3>
+                  <p>{faqItem.answer}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="container mx-auto my-12 max-w-[600px] space-y-12">
-            {faqs.map((faq, idx) => (
-              <section key={idx} id={'faq-' + faq.section}>
-                <h2 className="mb-4 text-left text-base font-semibold tracking-tight text-foreground/60">
-                  {faq.section}
-                </h2>
-                <Accordion
-                  type="single"
-                  collapsible
-                  className="flex w-full flex-col items-center justify-center"
-                >
-                  {faq.qa.map((faqItem, index) => (
-                    <AccordionItem
-                      key={index}
-                      value={faqItem.question}
-                      className="w-full max-w-[600px]"
-                    >
-                      <AccordionTrigger>{faqItem.question}</AccordionTrigger>
-                      <AccordionContent>{faqItem.answer}</AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </section>
-            ))}
-          </div>
-          <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
-            Still have questions? Email me at{' '}
-            <a href="mailto:s@serg.tech" className="underline">
-              s@serg.tech
-            </a>
-          </h4>
         </div>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </div>
   );
 }

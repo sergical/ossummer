@@ -10,7 +10,7 @@ contract OssNFTTest is Test {
     address allowlistedAddress = address(0x1);
     address nonAllowlistedAddress = address(0x2);
 
-    string constant INITIAL_URI = "ipfs://QmWAA8mEDoS9kQfzdW1PdaPwbWKe1JDDMemhNRB3J5nczc";
+    string constant INITIAL_URI = "ipfs://Qma7JqFtdM1asE6w4u4N55Fni8qBzUPu1ddkborewT2S9p";
 
     function setUp() public {
         oss = new OssNFT(INITIAL_URI);

@@ -30,7 +30,7 @@ function OnchainProviders({ children }: Props) {
           walletList: ['coinbase_wallet'],
           theme: theme === 'light' ? 'light' : 'dark',
           accentColor: '#676FFF',
-          logo: `/logo.png`,
+          logo: `/logo-text.png`,
         },
         externalWallets: {
           coinbaseWallet: {

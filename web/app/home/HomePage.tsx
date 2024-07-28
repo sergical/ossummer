@@ -1,24 +1,25 @@
-import dynamic from 'next/dynamic';
-import Footer from '@/components/layout/footer/Footer';
-import Header from '@/components/layout/header/Header';
+import { Navigation } from '@/components/layout/navigation';
+import { Donate } from './Donate';
 import { FAQ } from './FAQ';
-import FeaturedRepos from './FeaturedRepos';
+import { FeaturedRepos } from './FeaturedRepos';
 import { Hero } from './Hero';
 
+import { Mint } from './Mint';
 import { Partners } from './Partners';
-
-const HowItWorks = dynamic(async () => import('./HowItWorks'), { ssr: false });
+import { Perks } from './Perks';
 
 export default function HomePage() {
   return (
     <main>
-      <Header />
+      <Navigation />
       <Hero />
       <Partners />
+
+      <Donate />
+      <Mint />
+      <Perks />
       <FeaturedRepos />
-      <HowItWorks />
       <FAQ />
-      <Footer />
     </main>
   );
 }

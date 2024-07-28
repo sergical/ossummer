@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '../ui/skeleton';
 
 export default function LoadingCard() {
@@ -11,6 +11,9 @@ export default function LoadingCard() {
       <CardContent>
         <Skeleton className="h-[25px] w-[full] rounded-xl" />
       </CardContent>
+      <CardFooter>
+        <Skeleton className="h-[25px] w-[100px] rounded-full" />
+      </CardFooter>
     </Card>
   );
 }

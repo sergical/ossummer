@@ -1,10 +1,17 @@
 import React from 'react';
 
-import { StarIcon } from '@radix-ui/react-icons';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 
 import Link from 'next/link';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Repository } from '@/types/github';
 import { OssActions } from '../core/OssActions';
 import { SocialShare } from '../core/SocialShare';
@@ -20,27 +27,25 @@ export function RepositoryCard({
 }) {
   return (
     <Card className="flex flex-col">
-      <CardHeader className="flex flex-1 flex-row justify-between gap-2">
-        <div>
-          <CardTitle>{repo.full_name}</CardTitle>
-          <CardDescription>{repo.description}</CardDescription>
+      <CardHeader className="flex flex-row justify-between gap-2">
+        <div className="flex flex-col gap-1">
+          <CardTitle>{repo.name}</CardTitle>
+          <CardDescription>by {repo.owner?.login ?? 'Unknown'}</CardDescription>
         </div>
         {projectId && <SocialShare shareObjectId={projectId} shareObjectType="projects" />}
       </CardHeader>
-      <CardContent className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-          <StarIcon className="h-4 w-4" />
-          <span>{repo.stargazers_count}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" asChild>
+      <CardContent className="flex flex-1">{repo.description}</CardContent>
+      <CardFooter>
+        <div className="flex flex-row gap-2">
+          {walletAddress && <OssActions walletAddress={walletAddress} />}
+          <Button variant="link" asChild>
             <Link href={repo.html_url} target="_blank" rel="noopener noreferrer" prefetch={false}>
+              <GitHubLogoIcon className="mr-2 h-4 w-4" />
               View on GitHub
             </Link>
           </Button>
-          {walletAddress && <OssActions walletAddress={walletAddress} />}
         </div>
-      </CardContent>
+      </CardFooter>
     </Card>
   );
 }

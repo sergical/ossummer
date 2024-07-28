@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+
 import { cn } from '@/lib/utils';
+import LoginButton from './login-button';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,16 +19,25 @@ export function Navigation() {
       <div
         className={cn(
           isOpen && '!rounded-b-none !border-b-0',
-          'flex w-full max-w-5xl items-center justify-between rounded-lg border border-black/10 bg-white/50 px-6 py-3 backdrop-blur-lg',
+          'flex w-full max-w-7xl items-center justify-between rounded-lg border border-black/10 bg-white/50 px-6 py-3 backdrop-blur-lg',
         )}
       >
         <div className="flex items-center gap-2">
-          <Image src="/logo-text.png" alt="OS Summer Logo" width={162} height={40} />
+          <Link href="/">
+            <Image src="/logo-text.png" alt="OS Summer Logo" width={162} height={40} />
+          </Link>
         </div>
-        <div className="hidden items-center gap-2 lg:flex">
-          <Button>
-            <Link href="/projects">Explore projects</Link>
-          </Button>
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link href="/projects" className="text-sm font-bold underline-offset-4 hover:underline">
+            Projects
+          </Link>
+          <Link
+            href="/contributors"
+            className="text-sm font-bold underline-offset-4 hover:underline"
+          >
+            Contributors
+          </Link>
+          <LoginButton />
         </div>
         <button className="lg:hidden" onClick={toggleMenu} aria-label="Toggle menu" type="button">
           <motion.div
@@ -67,11 +77,14 @@ export function Navigation() {
             transition={{ duration: 0.2 }}
             className="absolute left-0 right-0 top-full mx-4 overflow-hidden rounded-b-lg border border-black/10 bg-white/50 p-4 shadow-lg backdrop-blur-lg"
           >
-            <div className="p-4">
-              <Button className="mb-2 w-full">
-                <Link href="/projects">Explore projects</Link>
-              </Button>
-              {/* Add more menu items here */}
+            <div className="flex flex-col items-center justify-center gap-4 p-4">
+              <Link href="/projects" className="text-sm font-bold">
+                Projects
+              </Link>
+              <Link href="/contributors" className="text-sm font-bold">
+                Contributors
+              </Link>
+              <LoginButton />
             </div>
           </motion.div>
         )}

@@ -9,7 +9,7 @@ contract OssNFTScript is Script {
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        string memory initialURI = "ipfs://QmWAA8mEDoS9kQfzdW1PdaPwbWKe1JDDMemhNRB3J5nczc";
+        string memory initialURI = "ipfs://Qma7JqFtdM1asE6w4u4N55Fni8qBzUPu1ddkborewT2S9p";
 
         vm.startBroadcast(deployerPrivateKey);
 

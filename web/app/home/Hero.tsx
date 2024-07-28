@@ -11,9 +11,9 @@ export function Hero() {
         <div className="container z-10 flex flex-col gap-4">
           <h1 className="text-4xl font-bold">Empower open source</h1>
           <p className="text-lg">
-            Support open-source projects with crypto.
+            Support open-source projects with code or onchain
             <br />
-            Receive rewards by building the open-source future.
+            Receive rewards for contributing to the future of open source
           </p>
           <div className="flex flex-row gap-4">
             <MainCta />

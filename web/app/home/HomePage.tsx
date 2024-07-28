@@ -1,3 +1,4 @@
+import { Navigation } from '@/components/layout/navigation';
 import { Donate } from './Donate';
 import { FAQ } from './FAQ';
 import { FeaturedRepos } from './FeaturedRepos';
@@ -10,6 +11,7 @@ import { Perks } from './Perks';
 export default function HomePage() {
   return (
     <main>
+      <Navigation />
       <Hero />
       <Partners />
 

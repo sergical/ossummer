@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { Database } from 'types/supabase';
 import { Confetti } from '@/components/magicui/confetti';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,6 +14,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { useEntries } from '@/hooks/useEntries';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { APIResponse } from '@/types/api';
+import { Database } from '@/types/supabase';
 
 export default function Submission({
   pr,

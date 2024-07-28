@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { Database } from 'types/supabase';
 import LoadingCard from '@/components/Repository/LoadingCard';
 import { RepositoryCard } from '@/components/Repository/RepositoryCard';
 import { Repository } from '@/types/github';
+import { Database } from '@/types/supabase';
 
 export function ProjectCard({
   project,
@@ -15,7 +15,8 @@ export function ProjectCard({
   const [isLoading, setIsLoading] = useState(true);
   const [projectInfo, setProjectInfo] = useState<Repository | null>(null);
   useEffect(() => {
-    fetch(project.api_url ?? '')
+    if (!project.api_url) return;
+    fetch(project.api_url)
       .then(async (res) => res.json())
       .then((data) => {
         setProjectInfo(data as Repository);

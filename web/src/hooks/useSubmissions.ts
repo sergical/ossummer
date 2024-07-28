@@ -1,6 +1,6 @@
 import useSWR from 'swr';
-import { Database } from 'types/supabase';
 import fetcher from '@/lib/fetcher';
+import { Database } from '@/types/supabase';
 
 export const useSubmissions = () => {
   const { data, error, mutate } = useSWR<

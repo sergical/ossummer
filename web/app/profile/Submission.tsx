@@ -3,10 +3,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PullRequest } from '@prisma/client';
+
 import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { Database } from 'types/supabase';
 import { Confetti } from '@/components/magicui/confetti';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,11 @@ import { useEntries } from '@/hooks/useEntries';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { APIResponse } from '@/types/api';
 
-export default function Submission({ pr }: { pr: PullRequest }) {
+export default function Submission({
+  pr,
+}: {
+  pr: Database['public']['Tables']['pull_requests']['Row'];
+}) {
   const [loading, setLoading] = useState(false);
   const { mutate } = useSubmissions();
   const { mutate: mutateEntries } = useEntries();
@@ -70,7 +75,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
       <CardFooter className="flex justify-end">
         <div className="flex gap-2">
           <Button asChild variant="ghost">
-            <Link target="_blank" href={pr.publicUrl}>
+            <Link target="_blank" href={pr.public_url ?? ''}>
               View PR
             </Link>
           </Button>
@@ -79,7 +84,7 @@ export default function Submission({ pr }: { pr: PullRequest }) {
               disabled={loading}
               variant="outline"
               type="button"
-              onClick={async () => recheckPullRequest(pr.apiUrl)}
+              onClick={async () => recheckPullRequest(pr.api_url ?? '')}
             >
               {loading ? <Loader2Icon className="h-4 w-4 animate-spin" /> : 'Recheck'}
             </Button>

@@ -1,9 +1,12 @@
-import { PullRequest } from '@prisma/client';
 import useSWR from 'swr';
+import { Database } from 'types/supabase';
 import fetcher from '@/lib/fetcher';
 
 export const useSubmissions = () => {
-  const { data, error, mutate } = useSWR<PullRequest[], Error>('/api/submissions', fetcher);
+  const { data, error, mutate } = useSWR<
+    Database['public']['Tables']['pull_requests']['Row'][],
+    Error
+  >('/api/submissions', fetcher);
 
   return {
     submissions: data,

@@ -1,7 +1,6 @@
 import { ProjectsList } from 'app/projects/components/ProjectsList';
 import ColorChangingHeading from '@/components/color-changing-header';
 import { HoverLink } from '@/components/hover-link';
-
 import { createClient } from '@/utils/supabase/client';
 
 export async function FeaturedRepos() {

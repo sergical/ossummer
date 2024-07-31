@@ -1,27 +1,26 @@
-'use client';
+import Link from 'next/link';
 
-import DotPattern from '@/components/magicui/dot-pattern';
-import { cn } from '@/lib/utils';
+import LoginButton from '@/components/layout/login-button';
+import { Button } from '@/components/ui/button';
 
 export function ProjectsHero() {
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center gap-5 overflow-hidden bg-background p-20">
-      <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-foreground">
-        Projects
-      </p>
-      <p className="z-10 whitespace-pre-wrap text-center text-lg text-foreground">
-        Explore and support the projects that are participating in Open Source Summer.
-      </p>
-      <DotPattern
-        width={20}
-        height={20}
-        cx={1}
-        cy={1}
-        cr={1}
-        className={cn(
-          '[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] ',
-        )}
-      />
-    </div>
+    <section id="projects-hero" className="relative m-4 overflow-hidden rounded-4xl bg-hero-bg">
+      <div className="relative flex h-full flex-col justify-center py-36">
+        <div className="container z-10 flex flex-col gap-4">
+          <h1 className="text-4xl font-bold">Projects</h1>
+          <p className="max-w-xl text-lg">
+            Explore the projects that are participating in Open Source Summer. Add your projects or
+            start contributing and track your PRs in your dashboard
+          </p>
+          <div className="flex flex-row gap-4">
+            <LoginButton inNav={false} />
+            <Button asChild variant="outline">
+              <Link href="/projects/add">Add project</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

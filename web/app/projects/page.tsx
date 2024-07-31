@@ -1,7 +1,4 @@
-import Footer from '@/components/layout/footer/Footer';
-import Header from '@/components/layout/header/Header';
-import Main from '@/components/layout/Main';
-
+import { Navigation } from '@/components/layout/navigation';
 import { generateMetadata } from '@/utils/generateMetadata';
 import { ProjectsHero } from './components/ProjectsHero';
 import { ProjectsList } from './components/ProjectsList';
@@ -13,15 +10,15 @@ export const metadata = generateMetadata({
   pathname: 'contributors',
 });
 
-export default function ContributorsPage() {
+export default function ProjectsPage() {
   return (
-    <>
-      <Header />
-      <Main>
-        <ProjectsHero />
+    <main>
+      <Navigation />
+
+      <ProjectsHero />
+      <div className="container">
         <ProjectsList />
-      </Main>
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 }

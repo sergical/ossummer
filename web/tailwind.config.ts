@@ -27,6 +27,9 @@ const config = {
         'gradient-2': 'linear-gradient(270deg, #f55925 0%, #D75986 100%)',
         ossummer:
           'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(250, 184, 81, 0.1089) 33%, rgba(252, 128, 245, 0.33) 66%, rgba(250, 60, 13, 0.2178) 100%)',
+        'hero-bg':
+          'linear-gradient(90deg,  rgba(250, 184, 81, 0.1089) 33%, rgba(252, 128, 245, 0.33) 66%, rgba(250, 60, 13, 0.2178) 100%)',
+
         'ossummer-text': 'linear-gradient(71.42deg, #FAB851 12.58%, #FC80F5 50%, #FA3C0D 87.42%)',
       },
       gridTemplateColumns: {

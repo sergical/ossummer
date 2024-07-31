@@ -1,20 +1,8 @@
-'use client';
-
-import { EllipsisVerticalIcon } from 'lucide-react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { DEFAULT_URL } from '@/constants';
 
-// Embed example
-// https://warpcast.com/~/compose?text=Hello%20@farcaster!&embeds[]=https://farcaster.xyz&embeds[]=https://github.com/farcasterxyz/protocol
+import { DEFAULT_URL } from '@/constants';
+import { FarcasterIcon } from '../icons/farcaster';
 
 export function SocialShare({
   shareObjectId,
@@ -29,21 +17,11 @@ export function SocialShare({
   } on Open Source Summer!`;
   const intentUrl = `https://warpcast.com/~/compose?text=${shareText}&embeds[]=${shareUrl}`;
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <EllipsisVerticalIcon />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Social</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => window.open(intentUrl, '_blank')}>
-            Share on Farcaster
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button variant="link" asChild>
+      <Link href={intentUrl} target="_blank" rel="noopener noreferrer" prefetch={false}>
+        Share on Farcaster
+        <FarcasterIcon className="ml-2 h-5 w-5" />
+      </Link>
+    </Button>
   );
 }

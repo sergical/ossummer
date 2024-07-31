@@ -1,20 +1,14 @@
 import './global.css';
 
 import { Analytics } from '@vercel/analytics/react';
-import { Inter as FontSans } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import OnchainProviders from '@/OnchainProviders';
 import { ThemeProvider } from '@/ThemeProvider';
 
-import { inter } from './fonts';
 import type { Metadata } from 'next';
-
-const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-});
 
 export const viewport = {
   width: 'device-width',
@@ -30,11 +24,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'flex min-h-screen flex-1 flex-col bg-background font-sans antialiased',
-          fontSans.variable,
+          'flex min-h-screen flex-1 flex-col bg-background antialiased',
+          GeistSans.className,
         )}
       >
         <ThemeProvider

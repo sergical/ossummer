@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 
-export default function LoginButton() {
+export default function LoginButton({ inNav = true }: { inNav?: boolean }) {
   const router = useRouter();
   const { ready, authenticated } = usePrivy();
 
@@ -27,13 +27,13 @@ export default function LoginButton() {
 
   if (authenticated) {
     return (
-      <Button size="sm" asChild>
+      <Button size={inNav ? 'sm' : 'default'} asChild>
         <Link href="/dashboard">Dashboard</Link>
       </Button>
     );
   }
   return (
-    <Button size="sm" disabled={disableLogin} onClick={login} type="button">
+    <Button size={inNav ? 'sm' : 'default'} disabled={disableLogin} onClick={login} type="button">
       Log in
     </Button>
   );

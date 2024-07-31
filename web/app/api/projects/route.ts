@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       },
     });
     const projectInfoJson = (await projectInfo.json()) as Repository;
-    const stars = projectInfoJson.stargazers_count;
+
     const maintainer = projectInfoJson.owner?.login;
     const apiUrl = projectInfoJson.url;
     const { error } = await supabase
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       .insert({
         name,
         description,
-        stars_count: stars,
+
         language,
         maintainer,
         public_url: projectUrl,

@@ -34,10 +34,12 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "generate-types.mjs"
   ],
   "exclude": [
     "contracts",
-    "node_modules"
+    "node_modules",
+    "generate-types.mjs"
   ]
 }

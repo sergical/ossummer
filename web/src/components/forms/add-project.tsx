@@ -25,9 +25,20 @@ import { APIResponse } from '@/types/api';
 import { Repository } from '@/types/github';
 
 const FormSchema = z.object({
-  projectUrl: z.string().url({
-    message: 'Project URL must be a valid URL.',
-  }),
+  projectUrl: z
+    .string()
+    .url({
+      message: 'Project URL must be a valid URL.',
+    })
+    .refine(
+      (url) => {
+        const githubRepoRegex = /^https?:\/\/github\.com\/[^/]+\/[^/]+\/?$/;
+        return githubRepoRegex.test(url);
+      },
+      {
+        message: 'URL must be a valid GitHub repository URL.',
+      },
+    ),
   name: z.string().min(1, { message: 'Name is required' }),
   description: z.string().min(1, { message: 'Description is required' }),
   language: z.string().optional(),
@@ -101,7 +112,7 @@ export function AddProjectForm() {
                 <FormControl>
                   <div className="relative">
                     <Input
-                      placeholder="https://github.com/sergical/ossummer"
+                      placeholder="https://github.com/username/repository"
                       {...field}
                       onChange={async (e) => {
                         field.onChange(e);
@@ -128,7 +139,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="My awesome open source repo" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -141,7 +152,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea {...field} placeholder="This is a really cool open source project" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -154,7 +165,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Language</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="TypeScript" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

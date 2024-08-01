@@ -1,10 +1,7 @@
-import Footer from '@/components/layout/footer/Footer';
-import Header from '@/components/layout/header/Header';
-import Main from '@/components/layout/Main';
-
+import { Navigation } from '@/components/layout/navigation';
 import { generateMetadata } from '@/utils/generateMetadata';
-import ContributorsList from './components/ContributorsList';
-import ContributorsHero from './components/Hero';
+import { ContributorsHero } from './components/ContributorsHero';
+import { ContributorsList } from './components/ContributorsList';
 
 export const metadata = generateMetadata({
   title: 'Contributors | Oper Source Summer',
@@ -15,13 +12,13 @@ export const metadata = generateMetadata({
 
 export default function ContributorsPage() {
   return (
-    <>
-      <Header />
-      <Main>
-        <ContributorsHero />
+    <main>
+      <Navigation />
+
+      <ContributorsHero />
+      <div className="container mt-16">
         <ContributorsList />
-      </Main>
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 }

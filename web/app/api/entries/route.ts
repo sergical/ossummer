@@ -1,19 +1,16 @@
-import { cookies } from 'next/headers';
+import { getPrivyUser } from '@/server/actions';
 
-import { privy } from '@/server/privy';
 import { createClient } from '@/utils/supabase/server';
 
 export async function GET() {
   const supabase = createClient();
-  const privyAccessToken = cookies().get('privy-token');
-  if (!privyAccessToken) {
-    return Response.json({ error: 'No privy access token found.' }, { status: 401 });
+  const user = await getPrivyUser();
+
+  if (!user) {
+    return Response.json({ error: 'No user found.' }, { status: 401 });
   }
 
-  const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
-  const privyUserId = verifiedClaims.userId;
-
-  const pullRequests = await supabase.from('pull_requests').select('*').eq('user_id', privyUserId);
+  const pullRequests = await supabase.from('pull_requests').select('*').eq('user_id', user.id);
 
   return Response.json(pullRequests);
 }

@@ -1,16 +1,26 @@
-// components/Navigation.jsx
+'use client';
+
 import React from 'react';
+import { BookOpenIcon, BuildingIcon, HomeIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 import { LogoutButton } from './logout-button';
 import { MobileNavigation } from './mobile-navigation';
 
 const navItems = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/contributors', label: 'Contributors' },
+  { href: '/dashboard', label: 'Home', icon: <HomeIcon className="h-4 w-4" /> },
+  {
+    href: '/dashboard/submissions',
+    label: 'Submissions',
+    icon: <BookOpenIcon className="h-4 w-4" />,
+  },
+  { href: '/dashboard/projects', label: 'Projects', icon: <BuildingIcon className="h-4 w-4" /> },
 ];
 
 export function Navigation() {
+  const pathname = usePathname();
   return (
     <>
       {/* Mobile Navigation */}
@@ -22,13 +32,17 @@ export function Navigation() {
           <Link href="/" className="mb-8">
             <Image src="/logo-text.png" alt="OS Summer Logo" width={162} height={40} />
           </Link>
-          <nav className="flex flex-col gap-4">
+          <nav className="flex flex-col gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-bold underline-offset-4 hover:underline"
+                className={cn(
+                  'flex items-center gap-2 rounded-md px-2 py-2 text-sm font-bold hover:bg-black/5',
+                  pathname === item.href && 'bg-black/10',
+                )}
               >
+                {item.icon}
                 {item.label}
               </Link>
             ))}

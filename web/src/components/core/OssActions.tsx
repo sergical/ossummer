@@ -24,7 +24,6 @@ export function OssActions({ walletAddress }: { walletAddress?: string }) {
   const { login } = usePrivy();
   const chainId = useChainId();
 
-  const isOwner = walletAddress === address;
   const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
@@ -47,7 +46,7 @@ export function OssActions({ walletAddress }: { walletAddress?: string }) {
     );
   }
 
-  if (isOwner) {
+  if (!walletAddress) {
     return null;
   }
 
@@ -57,7 +56,12 @@ export function OssActions({ walletAddress }: { walletAddress?: string }) {
       return;
     }
 
-    sendTransaction({ to: address, value: DONATION_VALUE });
+    if (!walletAddress) {
+      toast.error('This project does not have a wallet address');
+      return;
+    }
+
+    sendTransaction({ to: walletAddress as `0x${string}`, value: DONATION_VALUE });
   }
 
   return isConfirmed ? (

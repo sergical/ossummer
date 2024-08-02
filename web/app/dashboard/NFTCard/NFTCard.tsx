@@ -1,25 +1,23 @@
 /* eslint-disable react-perf/jsx-no-new-function-as-prop */
-/* eslint-disable @typescript-eslint/no-floating-promises */
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
 
+import Image from 'next/image';
 import { toast } from 'sonner';
-import { TransactionExecutionError } from 'viem';
-import {
-  useAccount,
-  useChainId,
-  useSimulateContract,
-  useWaitForTransactionReceipt,
-  useWriteContract,
-  useReadContract,
-} from 'wagmi';
+
+import { useAccount, useChainId, useSimulateContract, useReadContract } from 'wagmi';
+
+import { useWriteContracts } from 'wagmi/experimental';
 import { Button } from '@/components/ui/button';
 import { EXPECTED_CHAIN } from '@/constants';
 import { getChainsForEnvironment } from '@/store/supportedChains';
 import { APIResponse } from '@/types/api';
+import isLocal from '@/utils/isLocal';
 import { useOSSummerContract } from './_contracts/useOSSummerContract';
+import { CallStatus } from './CallStatus';
 
 export enum MintSteps {
   START_MINT_STEP,
@@ -29,10 +27,18 @@ export enum MintSteps {
 }
 
 export default function NFTCard() {
-  const [mintStep, setMintStep] = useState(MintSteps.START_MINT_STEP);
   const [isOnAllowlist, setIsOnAllowlist] = useState(false);
   const [addingToAllowlist, setAddingToAllowlist] = useState(false);
   const [hasMinted, setHasMinted] = useState(false);
+  const [defaultUrl, setDefaultUrl] = useState<string>();
+
+  useEffect(() => {
+    // Use the local API URL to target the Paymaster directly without a proxy
+    // if running on localhost, otherwise use the Paymaster Proxy.
+    const paymasterURL = process.env.NEXT_PUBLIC_PAYMASTER_URL;
+    const isLocalEnv = isLocal();
+    setDefaultUrl(isLocalEnv ? paymasterURL : `${document.location.origin}/api/paymaster-proxy`);
+  }, []);
 
   const { chain: accountChain, address } = useAccount();
 
@@ -55,31 +61,9 @@ export default function NFTCard() {
     },
   });
 
-  const { data: mintData, error: mintDataError } = useSimulateContract({
-    address: contract.status === 'ready' ? contract.address : undefined,
-    chainId,
-    abi: contract.abi,
-    functionName: 'mint',
-    args: [],
-    query: {
-      enabled: onCorrectNetwork && isOnAllowlist,
-    },
-  });
+  const { data: callID, writeContracts } = useWriteContracts();
 
-  if (mintDataError) {
-    console.error('mintDataError', mintDataError);
-  }
-
-  const { writeContract: performMint, error: errorMint, data: dataMint } = useWriteContract();
-
-  const { status: transactionStatus } = useWaitForTransactionReceipt({
-    hash: dataMint,
-    query: {
-      enabled: !!dataMint,
-    },
-  });
-
-  const { data: balanceData, refetch: refetchBalance } = useReadContract({
+  const { data: balanceData } = useReadContract({
     address: contract.status === 'ready' ? contract.address : undefined,
     abi: contract.abi,
     functionName: 'balanceOf',
@@ -92,32 +76,8 @@ export default function NFTCard() {
   useEffect(() => {
     if (balance && balance > 0n) {
       setHasMinted(true);
-      setMintStep(MintSteps.MINT_COMPLETE_STEP);
     }
   }, [balance]);
-
-  useEffect(() => {
-    if (transactionStatus === 'success') {
-      setMintStep(MintSteps.MINT_COMPLETE_STEP);
-      refetchBalance();
-    }
-
-    if (errorMint) {
-      const isOutOfGas =
-        errorMint instanceof TransactionExecutionError &&
-        errorMint.message.toLowerCase().includes('out of gas');
-      setMintStep(isOutOfGas ? MintSteps.OUT_OF_GAS_STEP : MintSteps.START_MINT_STEP);
-    }
-  }, [transactionStatus, setMintStep, errorMint, refetchBalance]);
-
-  const handleMint = useCallback(() => {
-    if (mintData?.request) {
-      performMint?.(mintData.request);
-      setMintStep(MintSteps.MINT_PROCESSING_STEP);
-    } else {
-      console.error('Mint data request is undefined');
-    }
-  }, [mintData, performMint, setMintStep]);
 
   const handleWhitelist = async () => {
     setAddingToAllowlist(true);
@@ -154,27 +114,47 @@ export default function NFTCard() {
     }
   }, [isOnAllowlistData, handleCheckEligibility]);
 
+  if (contract.status !== 'ready') {
+    console.error('Contract is not ready');
+    return null;
+  }
+
+  const handleMintWithPaymaster = () => {
+    writeContracts({
+      contracts: [
+        {
+          address: contract.address,
+          abi: contract.abi,
+          functionName: 'mint',
+          args: [],
+        },
+      ],
+      capabilities: {
+        paymasterService: {
+          url: defaultUrl,
+        },
+      },
+    });
+  };
+
   const mintFlowMarkup = () => {
     if (hasMinted) {
-      return <div className="text-lg">Already Minted!</div>;
+      return (
+        <div className="flex flex-col gap-4">
+          <h3 className="text-lg">Already Minted!</h3>
+          <Image src="/nft.png" alt="NFT" width={200} height={200} />
+          <p className="text-sm">More details on what perks this NFT unlocks coming soon!</p>
+        </div>
+      );
     }
-
-    switch (mintStep) {
-      case MintSteps.START_MINT_STEP:
-        return (
-          <Button onClick={handleMint} disabled={addingToAllowlist}>
-            {addingToAllowlist ? 'Minting...' : 'Mint'}
-          </Button>
-        );
-      case MintSteps.MINT_PROCESSING_STEP:
-        return <div className="text-lg">Minting...</div>;
-      case MintSteps.MINT_COMPLETE_STEP:
-        return <div className="text-lg">Minted!</div>;
-      case MintSteps.OUT_OF_GAS_STEP:
-        return <div className="text-lg">Out of gas!</div>;
-      default:
-        return <div className="text-lg">Unknown step</div>;
-    }
+    return (
+      <>
+        <Button onClick={handleMintWithPaymaster} disabled={addingToAllowlist}>
+          {addingToAllowlist ? 'Minting...' : 'Mint'}
+        </Button>
+        <CallStatus id={callID ?? ''} />
+      </>
+    );
   };
 
   if (!onCorrectNetwork) {
@@ -182,14 +162,17 @@ export default function NFTCard() {
   }
 
   return (
-    <div className="z-10 text-2xl font-bold">
-      {hasMinted || isOnAllowlist ? (
-        mintFlowMarkup()
-      ) : (
-        <Button onClick={handleWhitelist} disabled={addingToAllowlist}>
-          {addingToAllowlist ? 'Confirming...' : 'Confirm submissions'}
-        </Button>
-      )}
+    <div className="flex flex-col">
+      <h3 className="text-2xl font-bold">Your Contributor NFT</h3>
+      <div className="z-10 text-2xl font-bold">
+        {hasMinted || isOnAllowlist ? (
+          mintFlowMarkup()
+        ) : (
+          <Button onClick={handleWhitelist} disabled={addingToAllowlist}>
+            {addingToAllowlist ? 'Confirming...' : 'Confirm submissions'}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

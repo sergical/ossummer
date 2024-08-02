@@ -1,13 +1,13 @@
 import { Navigation } from '@/components/layout/navigation';
 import { generateMetadata } from '@/utils/generateMetadata';
-import { ProjectsHero } from './components/ProjectsHero';
-import { ProjectsList } from './components/ProjectsList';
+import { ProjectsHero } from '../../src/components/project/ProjectsHero';
+import { ProjectsList } from '../../src/components/project/ProjectsList';
 
 export const metadata = generateMetadata({
-  title: 'Contributors | Oper Source Summer',
-  description: 'Explore the contributors that are participating in Open Source Summer. ',
+  title: 'Projects | Open Source Summer',
+  description: 'Explore the projects that are participating in Open Source Summer. ',
   images: 'themes.png',
-  pathname: 'contributors',
+  pathname: 'projects',
 });
 
 export default function ProjectsPage() {
@@ -16,7 +16,7 @@ export default function ProjectsPage() {
       <Navigation />
 
       <ProjectsHero />
-      <div className="container">
+      <div className="container mt-16">
         <ProjectsList />
       </div>
     </main>

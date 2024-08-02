@@ -1,23 +1,37 @@
-'use client';
+import React, { Suspense } from 'react';
 
-import React from 'react';
+import LoadingCard from '@/components/Repository/LoadingCard';
+import { createClient } from '@/utils/supabase/server';
+import { ContributorCard } from './ContributorCard';
 
-import { useContributors } from '@/hooks/useContributors';
-import Contributor from './Contributor';
+export const loadingMarkup = Array.from({ length: 2 }).map((_, index) => (
+  // eslint-disable-next-line react/no-array-index-key
+  <LoadingCard key={index} />
+));
 
-export default function ContributorsList() {
-  const { contributors, isLoading, isError } = useContributors();
+export async function ContributorsList({ limit }: { limit?: number }) {
+  const supabase = createClient();
+  const { data, error } = await supabase.rpc('get_top_contributors', { limit_num: limit ?? 10 });
+
+  if (error) {
+    console.error(error);
+    return <div>Error loading contributors</div>;
+  }
+
   return (
-    <div>
-      {isLoading && <div className="text-center">Loading...</div>}
-      {isError && <div className="text-center">Error: {isError.message}</div>}
-      {contributors && (
-        <ul className="mx-auto max-w-[500px] space-y-4">
-          {contributors.map((contributor) => (
-            <Contributor key={contributor.id} contributor={contributor} />
-          ))}
-        </ul>
-      )}
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+      <Suspense fallback={loadingMarkup}>
+        {data.map((contributor) => (
+          <ContributorCard
+            key={contributor.user_id}
+            contributor={{
+              id: contributor.user_id,
+              name: contributor.author,
+              pullRequestCount: contributor.pull_request_count,
+            }}
+          />
+        ))}
+      </Suspense>
     </div>
   );
 }

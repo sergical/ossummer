@@ -25,15 +25,26 @@ import { APIResponse } from '@/types/api';
 import { Repository } from '@/types/github';
 
 const FormSchema = z.object({
-  projectUrl: z.string().url({
-    message: 'Project URL must be a valid URL.',
-  }),
+  projectUrl: z
+    .string()
+    .url({
+      message: 'Project URL must be a valid URL.',
+    })
+    .refine(
+      (url) => {
+        const githubRepoRegex = /^https?:\/\/github\.com\/[^/]+\/[^/]+\/?$/;
+        return githubRepoRegex.test(url);
+      },
+      {
+        message: 'URL must be a valid GitHub repository URL.',
+      },
+    ),
   name: z.string().min(1, { message: 'Name is required' }),
   description: z.string().min(1, { message: 'Description is required' }),
   language: z.string().optional(),
 });
 
-export function AddProjectForm() {
+export function AddProjectForm({ isDashboard = false }: { isDashboard?: boolean }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -49,14 +60,27 @@ export function AddProjectForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
+      let response;
+      if (isDashboard) {
+        response = await fetch('/api/user-projects', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        });
+      } else {
+        response = await fetch('/api/projects', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        });
+      }
       const responseJson = (await response.json()) as APIResponse<string>;
+
       if (responseJson.success) {
         toast.success('Project added');
-        router.push('/projects');
+        if (isDashboard) {
+          router.refresh();
+        } else {
+          router.push('/projects');
+        }
       } else {
         toast.error(responseJson.error);
       }
@@ -101,7 +125,7 @@ export function AddProjectForm() {
                 <FormControl>
                   <div className="relative">
                     <Input
-                      placeholder="https://github.com/sergical/ossummer"
+                      placeholder="https://github.com/username/repository"
                       {...field}
                       onChange={async (e) => {
                         field.onChange(e);
@@ -128,7 +152,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="My awesome open source repo" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -141,7 +165,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea {...field} placeholder="This is a really cool open source project" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -154,7 +178,7 @@ export function AddProjectForm() {
               <FormItem>
                 <FormLabel>Language</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="TypeScript" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

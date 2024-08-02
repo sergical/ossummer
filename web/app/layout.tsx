@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <OnchainProviders>{children}</OnchainProviders>
-          <Toaster richColors />
+          <Toaster richColors theme="light" />
         </ThemeProvider>
         <Analytics />
       </body>

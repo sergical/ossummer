@@ -1,7 +1,7 @@
 import { Navigation } from '@/components/layout/navigation';
 import { generateMetadata } from '@/utils/generateMetadata';
-import { ProjectsHero } from './components/ProjectsHero';
-import { ProjectsList } from './components/ProjectsList';
+import { ProjectsHero } from '../../src/components/project/ProjectsHero';
+import { ProjectsList } from '../../src/components/project/ProjectsList';
 
 export const metadata = generateMetadata({
   title: 'Projects | Open Source Summer',

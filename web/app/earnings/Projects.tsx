@@ -1,7 +1,7 @@
 'use client';
 
 import { useUserProjects } from '@/hooks/useUserProjects';
-import { ProjectCard } from '../projects/components/ProjectCard';
+import { ProjectCard } from '../../src/components/project/ProjectCard';
 
 function Projects() {
   const { projects, isLoading, isError } = useUserProjects();

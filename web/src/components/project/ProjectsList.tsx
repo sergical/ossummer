@@ -23,8 +23,8 @@ export async function ProjectsList({ limit }: { limit?: number }) {
   }
 
   return (
-    <Suspense fallback={loadingMarkup}>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+      <Suspense fallback={loadingMarkup}>
         {data.map((project) => (
           <RepositoryCard
             key={project.id}
@@ -33,7 +33,7 @@ export async function ProjectsList({ limit }: { limit?: number }) {
             walletAddress={project.wallet_address ?? undefined}
           />
         ))}
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }

@@ -1,19 +1,18 @@
 import React from 'react';
-import Link from 'next/link';
+import { OnchainRewards } from './onchain-rewards';
+
+export const metadata = {
+  title: 'Dashboard | Open Source Summer',
+  description: 'Dashboard',
+};
 
 export default function DashboardPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold">Dashboard</h1>
-      <div className="mt-4">
-        <p>Welcome to Open Source Summer</p>
-        <p>
-          If you are here because you&apos;ve contributed to an open source project, you can{' '}
-          <Link href="/dashboard/submissions" className="underline underline-offset-4">
-            view and add your submissions
-          </Link>
-          .
-        </p>
+      <div className="mt-4 space-y-4">
+        <h2 className="text-xl font-bold">Onchain rewards</h2>
+        <OnchainRewards />
       </div>
     </div>
   );

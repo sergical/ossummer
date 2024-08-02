@@ -1,4 +1,4 @@
-import Submission from 'app/profile/Submission';
+import Submission from '@/components/submission/submission';
 import { getPrivyUser } from '@/server/actions';
 import { createClient } from '@/utils/supabase/server';
 

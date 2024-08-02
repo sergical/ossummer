@@ -19,8 +19,8 @@ export async function ContributorsList({ limit }: { limit?: number }) {
   }
 
   return (
-    <Suspense fallback={loadingMarkup}>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+      <Suspense fallback={loadingMarkup}>
         {data.map((contributor) => (
           <ContributorCard
             key={contributor.user_id}
@@ -31,7 +31,7 @@ export async function ContributorsList({ limit }: { limit?: number }) {
             }}
           />
         ))}
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }

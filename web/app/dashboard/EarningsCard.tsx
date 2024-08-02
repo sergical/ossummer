@@ -3,23 +3,25 @@
 import React from 'react';
 import { Address, Avatar, Name } from '@coinbase/onchainkit/identity';
 
+import { useWallets } from '@privy-io/react-auth';
 import { formatEther } from 'viem';
 import { base } from 'viem/chains';
-import { useAccount, useBalance, useChainId } from 'wagmi';
+import { useBalance, useChainId } from 'wagmi';
 import { Badge } from '@/components/ui/badge';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export default function EarningsCard() {
   const chainId = useChainId();
+  const { wallets } = useWallets();
+  const address = wallets[0]?.address as `0x${string}`;
 
-  const { address } = useAccount();
   const { data: balance } = useBalance({ address, chainId, query: { enabled: !!address } });
 
   if (!address) return null;
 
   return (
-    <Card className="w-full">
+    <Card className="w-full md:w-1/2">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">

@@ -5,7 +5,6 @@ import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { PrivyProvider } from '@privy-io/react-auth';
 import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useTheme } from 'next-themes';
 
 import { createWagmiConfig } from '@/store/createWagmiConfig';
 import { EXPECTED_CHAIN } from './constants';
@@ -19,7 +18,6 @@ const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL as string;
 const wagmiConfig = createWagmiConfig(rpcUrl);
 
 function OnchainProviders({ children }: Props) {
-  const { theme } = useTheme();
   return (
     <PrivyProvider
       appId={process.env.NEXT_PUBLIC_PRIVY_ID as string}
@@ -28,7 +26,7 @@ function OnchainProviders({ children }: Props) {
         // Customize Privy's appearance in your app
         appearance: {
           walletList: ['coinbase_wallet'],
-          theme: theme === 'light' ? 'light' : 'dark',
+          theme: 'light',
           accentColor: '#676FFF',
           logo: `/logo-text.png`,
         },

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import LoginButton from '@/components/layout/login-button';
 import { Button } from '@/components/ui/button';
 
 export function ProjectsHero() {
@@ -14,8 +13,7 @@ export function ProjectsHero() {
             start contributing and track your PRs in your dashboard
           </p>
           <div className="flex flex-row gap-4">
-            <LoginButton inNav={false} />
-            <Button asChild variant="outline">
+            <Button asChild>
               <Link href="/projects/add">Add project</Link>
             </Button>
           </div>

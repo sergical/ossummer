@@ -4,6 +4,7 @@ import { getPrivyUser } from '@/server/actions';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const user = await getPrivyUser();
+
   if (!user) {
     redirect('/');
   }

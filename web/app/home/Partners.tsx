@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Marquee from '@/components/magicui/marquee';
+import { cn } from '@/lib/utils';
 
 const companies = [
   'Coinbase',
@@ -12,6 +13,10 @@ const companies = [
     name: 'Farcaster',
     src: '/sponsors/farcaster.png',
   },
+  {
+    name: 'Buildspace',
+    src: '/sponsors/build.png',
+  },
 ];
 
 export function Partners() {
@@ -23,8 +28,8 @@ export function Partners() {
             <Marquee className="max-w-full [--duration:40s]">
               {companies.map((logo, idx) => (
                 <Image
-                  width={112}
-                  height={40}
+                  width={typeof logo === 'string' ? 112 : logo.name === 'Buildspace' ? 40 : 112}
+                  height={typeof logo === 'string' ? 40 : logo.name === 'Buildspace' ? 40 : 112}
                   // eslint-disable-next-line react/no-array-index-key
                   key={idx}
                   src={
@@ -32,7 +37,10 @@ export function Partners() {
                       ? `https://cdn.magicui.design/companies/${logo}.svg`
                       : logo.src
                   }
-                  className="h-10 w-28 object-contain dark:brightness-0 dark:invert"
+                  className={cn(
+                    'h-10 w-28 object-contain dark:brightness-0 dark:invert',
+                    typeof logo !== 'string' && logo.name === 'Buildspace' && 'h-10 !w-10',
+                  )}
                   alt={typeof logo === 'string' ? logo : logo.name}
                 />
               ))}

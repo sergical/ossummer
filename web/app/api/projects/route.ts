@@ -46,7 +46,6 @@ export async function POST(request: Request) {
       .insert({
         name,
         description,
-
         language,
         maintainer,
         public_url: projectUrl,

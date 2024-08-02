@@ -1,21 +1,19 @@
-import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
-import { privy } from '@/server/privy';
+import { getPrivyUser } from '@/server/actions';
+
 import { APIResponse } from '@/types/api';
 import { PullRequest } from '@/types/github';
 import { createClient } from '@/utils/supabase/server';
 
 export async function GET() {
   const supabase = createClient();
-  const privyAccessToken = cookies().get('privy-token');
-  if (!privyAccessToken) {
-    return NextResponse.json({ error: 'No privy access token found.' }, { status: 401 });
+  const user = await getPrivyUser();
+  if (!user) {
+    return NextResponse.json({ error: 'No user found.' }, { status: 401 });
   }
 
-  const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
-  const privyUserId = verifiedClaims.userId;
-
-  const pullRequests = await supabase.from('pull_requests').select('*').eq('user_id', privyUserId);
+  const pullRequests = await supabase.from('pull_requests').select('*').eq('user_id', user.id);
 
   return NextResponse.json(pullRequests);
 }
@@ -24,23 +22,18 @@ export async function POST(request: NextRequest) {
   const supabase = createClient();
   const body = (await request.json()) as { pullRequestUrl: string };
   const { pullRequestUrl } = body;
-
-  const privyAccessToken = cookies().get('privy-token');
-  if (!privyAccessToken) {
-    return NextResponse.json({ error: 'No privy access token found.' }, { status: 401 });
+  const user = await getPrivyUser();
+  if (!user) {
+    return NextResponse.json({ error: 'No user found.' }, { status: 401 });
   }
-
-  const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
-  const privyUserId = verifiedClaims.userId;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call
   await (supabase.rpc as any)('set_config', {
     parameter: 'app.current_user_id',
-    value: privyUserId,
+    value: user.id,
   });
 
-  const privyUser = await privy.getUser(privyUserId);
-  const githubUserName = privyUser.github?.username;
+  const githubUserName = user.github?.username;
   if (!githubUserName) {
     return NextResponse.json<APIResponse<string>>({
       success: false,
@@ -64,7 +57,16 @@ export async function POST(request: NextRequest) {
       },
     },
   );
-  const pullRequestInfoJson = (await pullRequestInfo.json()) as PullRequest;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const pullRequestInfoResponse = await pullRequestInfo.json();
+  if (pullRequestInfoResponse.status === '404') {
+    return NextResponse.json<APIResponse<string>>({
+      success: false,
+      error: 'The pull request does not exist.',
+    });
+  }
+
+  const pullRequestInfoJson = pullRequestInfoResponse as PullRequest;
 
   if (pullRequestInfoJson.user.login !== githubUserName) {
     return NextResponse.json<APIResponse<string>>({
@@ -92,7 +94,7 @@ export async function POST(request: NextRequest) {
       api_url: pullRequestInfoJson.url,
       public_url: pullRequestInfoJson.html_url,
       title: pullRequestInfoJson.title,
-      user_id: privyUserId,
+      user_id: user.id,
       author: pullRequestInfoJson.user.login,
       state: pullRequestInfoJson.merged ? 'merged' : pullRequestInfoJson.state,
     });
@@ -104,6 +106,8 @@ export async function POST(request: NextRequest) {
         error: `Failed to create PR: ${error.message}`,
       });
     }
+
+    revalidatePath('/dashboard/submissions');
 
     return NextResponse.json<APIResponse<string>>({
       success: true,

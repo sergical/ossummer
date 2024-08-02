@@ -1,22 +1,13 @@
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Navigation } from '@/components/layout/dashboard/navigation';
-import { privy } from '@/server/privy';
+import { getPrivyUser } from '@/server/actions';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const privyAccessToken = cookies().get('privy-token');
-  if (!privyAccessToken) {
+  const user = await getPrivyUser();
+  if (!user) {
     redirect('/');
   }
 
-  const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
-  const privyUserId = verifiedClaims.userId;
-  const privyUser = await privy.getUser(privyUserId);
-  if (!privyUser) {
-    redirect('/');
-  }
-
-  console.log(privyUser);
   return (
     <main className="">
       <Navigation />

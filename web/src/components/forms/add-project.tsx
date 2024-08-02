@@ -44,7 +44,7 @@ const FormSchema = z.object({
   language: z.string().optional(),
 });
 
-export function AddProjectForm() {
+export function AddProjectForm({ isDashboard = false }: { isDashboard?: boolean }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -60,14 +60,27 @@ export function AddProjectForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
+      let response;
+      if (isDashboard) {
+        response = await fetch('/api/user-projects', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        });
+      } else {
+        response = await fetch('/api/projects', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        });
+      }
       const responseJson = (await response.json()) as APIResponse<string>;
+
       if (responseJson.success) {
         toast.success('Project added');
-        router.push('/projects');
+        if (isDashboard) {
+          router.refresh();
+        } else {
+          router.push('/projects');
+        }
       } else {
         toast.error(responseJson.error);
       }

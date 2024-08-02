@@ -32,8 +32,11 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const supabase = createClient();
-  const { projectUrl } = (await request.json()) as {
+  const { projectUrl, name, description, language } = (await request.json()) as {
     projectUrl: string;
+    name: string;
+    description: string;
+    language: string;
   };
 
   const privyAccessToken = cookies().get('privy-token');
@@ -84,12 +87,19 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const existingProject = await supabase
+    const { data: existingProject, error: existingProjectError } = await supabase
       .from('projects')
       .select('*')
       .eq('api_url', projectInfoJson.url);
 
-    if (existingProject) {
+    if (existingProjectError) {
+      return NextResponse.json<APIResponse<string>>({
+        success: false,
+        error: 'Failed to check for duplicate project.',
+      });
+    }
+
+    if (existingProject?.length) {
       return NextResponse.json<APIResponse<string>>({
         success: false,
         error: 'Duplicate project.',
@@ -99,7 +109,10 @@ export async function POST(request: NextRequest) {
     await supabase.from('projects').insert({
       api_url: projectInfoJson.url,
       public_url: projectInfoJson.html_url,
-      name: projectInfoJson.name,
+      name,
+      description,
+      language,
+      maintainer: githubUserName,
       owner_id: privyUserId,
       wallet_address: privyUser.wallet.address,
     });

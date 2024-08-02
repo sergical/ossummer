@@ -26,7 +26,12 @@ export async function ProjectsList({ limit }: { limit?: number }) {
     <Suspense fallback={loadingMarkup}>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
         {data.map((project) => (
-          <RepositoryCard key={project.id} repo={project} />
+          <RepositoryCard
+            key={project.id}
+            repo={project}
+            projectId={project.id}
+            walletAddress={project.wallet_address ?? undefined}
+          />
         ))}
       </div>
     </Suspense>

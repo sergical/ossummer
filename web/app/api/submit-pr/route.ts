@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { privy } from '@/server/privy';
+import { getPrivyUser } from '@/server/actions';
+
 import { APIResponse } from '@/types/api';
 import { PullRequest } from '@/types/github';
 import { createClient } from '@/utils/supabase/server';
@@ -11,20 +11,16 @@ export async function POST(request: NextRequest) {
   const { pullRequestUrl } = (await request.json()) as {
     pullRequestUrl: string;
   };
-
-  const privyAccessToken = cookies().get('privy-token');
-  if (!privyAccessToken) {
+  const user = await getPrivyUser();
+  if (!user) {
     return NextResponse.json<APIResponse<string>>({
       success: false,
-      error: 'No privy access token found.',
+      error: 'No user found.',
     });
   }
 
   try {
-    const verifiedClaims = await privy.verifyAuthToken(privyAccessToken.value);
-    const privyUserId = verifiedClaims.userId;
-    const privyUser = await privy.getUser(privyUserId);
-    const githubUserName = privyUser.github?.username;
+    const githubUserName = user.github?.username;
     if (!githubUserName) {
       return NextResponse.json<APIResponse<string>>({
         success: false,
@@ -73,7 +69,7 @@ export async function POST(request: NextRequest) {
       api_url: pullRequestInfoJson.url,
       public_url: pullRequestInfoJson.html_url,
       title: pullRequestInfoJson.title,
-      user_id: privyUserId,
+      user_id: user.id,
       author: pullRequestInfoJson.user.login,
       state: pullRequestInfoJson.merged ? 'merged' : pullRequestInfoJson.state,
     });

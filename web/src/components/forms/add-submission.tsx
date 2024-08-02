@@ -5,6 +5,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2Icon } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -40,6 +41,7 @@ const FormSchema = z.object({
 });
 
 export function AddSubmissionForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -55,7 +57,9 @@ export function AddSubmissionForm() {
       });
       const responseJson = (await response.json()) as APIResponse<string>;
       if (responseJson.success) {
+        form.reset();
         toast.success('Project added');
+        router.refresh();
       } else {
         toast.error(responseJson.error);
       }
@@ -67,12 +71,15 @@ export function AddSubmissionForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:max-w-lg">
-        <fieldset disabled={form.formState.isSubmitting} className="space-y-4">
+        <fieldset
+          disabled={form.formState.isSubmitting}
+          className="flex flex-col gap-4 md:flex-row md:items-end"
+        >
           <FormField
             control={form.control}
             name="pullRequestUrl"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full grow md:w-1/2">
                 <FormLabel>Pull Request URL</FormLabel>
                 <FormControl>
                   <div className="relative">
@@ -84,7 +91,7 @@ export function AddSubmissionForm() {
             )}
           />
 
-          <Button type="submit" className="mt-6">
+          <Button type="submit">
             {form.formState.isSubmitting ? (
               <div className="flex items-center gap-2">
                 <Loader2Icon className="animate-spin" /> Submitting

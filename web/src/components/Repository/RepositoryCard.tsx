@@ -44,7 +44,7 @@ export function RepositoryCard({
       <CardContent className="flex flex-1">{repo.description}</CardContent>
       <CardFooter>
         <div className="flex w-full flex-row justify-between gap-2">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-col gap-2 md:flex-row">
             {walletAddress && <OssActions walletAddress={walletAddress} />}
             <Button variant="link" asChild>
               <Link

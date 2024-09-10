@@ -36,7 +36,7 @@ export default function MintContractDemo() {
   const { data: collectionMetadata, isLoading: isLoadingCollectionMetadata } =
     useERC1155TokenMetadata({
       enabled: onCorrectNetwork,
-      address: contract.status === 'ready' ? contract.address : undefined,
+      address: contract.status === 'ready' ? (contract.address as `0x${string}`) : undefined,
       abi: contract.abi,
       chainId: EXPECTED_CHAIN.id,
     });
@@ -52,7 +52,7 @@ export default function MintContractDemo() {
       ? encodeFunctionData({
           abi: contract.abi,
           functionName: 'mint',
-          args: [address, BigInt(1), BigInt(1), address],
+          args: [address, BigInt(1), BigInt(1), address as `0x${string}`],
         })
       : undefined,
     query: { enabled: onCorrectNetwork && !!address },

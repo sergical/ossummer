@@ -1,4 +1,5 @@
 import './global.css';
+import '@coinbase/onchainkit/styles.css';
 
 import { Analytics } from '@vercel/analytics/react';
 import { GeistSans } from 'geist/font/sans';

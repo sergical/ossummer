@@ -34,7 +34,11 @@ export async function ContributorCard({ contributor }: ContributorCardProps) {
       </CardHeader>
       <CardContent>Contributions: {contributor.pullRequestCount}</CardContent>
       <CardFooter>
-        <OssActions walletAddress={user.wallet?.address} />
+        <OssActions
+          walletAddress={user.wallet?.address}
+          targetType="contributor"
+          targetId={contributor.id}
+        />
       </CardFooter>
     </Card>
   );

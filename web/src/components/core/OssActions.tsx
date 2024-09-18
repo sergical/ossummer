@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-bind */
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { ExternalLinkIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -19,7 +19,16 @@ import { DONATION_VALUE } from '@/constants';
 import { getEtherscanLink } from '@/utils/getEtherscanLink';
 import { Button } from '../ui/button';
 
-export function OssActions({ walletAddress }: { walletAddress?: string }) {
+export function OssActions({
+  walletAddress,
+  targetType,
+  targetId,
+}: {
+  walletAddress?: string;
+  targetType: string;
+  targetId: string;
+}) {
+  const [fetchSent, setFetchSent] = useState(false);
   const { isConnected, address } = useAccount();
   const { login } = usePrivy();
   const chainId = useChainId();
@@ -36,7 +45,21 @@ export function OssActions({ walletAddress }: { walletAddress?: string }) {
         (error as BaseError).shortMessage || (error as BaseError).message || 'An error occurred';
       toast.error(errorMessage);
     }
-  }, [error]);
+    if (isConfirmed && !fetchSent) {
+      setFetchSent(true);
+      fetch('/api/donate', {
+        method: 'POST',
+        body: JSON.stringify({
+          transactionHash: hash,
+          targetType,
+          targetId,
+        }),
+      }).catch((apiError) => {
+        console.error(apiError);
+        toast.error('Failed to update donation status');
+      });
+    }
+  }, [error, isConnected, login, isConfirmed, hash, targetType, targetId, fetchSent]);
 
   if (!isConnected) {
     return (

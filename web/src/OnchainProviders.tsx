@@ -5,8 +5,11 @@ import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { PrivyProvider } from '@privy-io/react-auth';
 import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThirdwebProvider } from 'thirdweb/react';
 
+import { Chain } from 'viem';
 import { createWagmiConfig } from '@/store/createWagmiConfig';
+import { ThirdwebAdapter } from './components/thirdweb-adapter';
 import { EXPECTED_CHAIN } from './constants';
 
 type Props = { children: ReactNode };
@@ -43,14 +46,16 @@ function OnchainProviders({ children }: Props) {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <WagmiProvider config={wagmiConfig}>
-          <OnchainKitProvider
-            apiKey={process.env.NEXT_PUBLIC_ONCHAIN_API_KEY as string}
-            chain={EXPECTED_CHAIN}
-          >
-            {children}
-          </OnchainKitProvider>
-        </WagmiProvider>
+        <ThirdwebProvider>
+          <WagmiProvider config={wagmiConfig}>
+            <OnchainKitProvider
+              apiKey={process.env.NEXT_PUBLIC_ONCHAIN_API_KEY as string}
+              chain={EXPECTED_CHAIN as Chain}
+            >
+              <ThirdwebAdapter>{children}</ThirdwebAdapter>
+            </OnchainKitProvider>
+          </WagmiProvider>
+        </ThirdwebProvider>
       </QueryClientProvider>
     </PrivyProvider>
   );

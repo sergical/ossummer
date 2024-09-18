@@ -6,8 +6,8 @@ export function OnchainRewards({ isEligible, ownsNft }: { isEligible: boolean; o
   const status = ownsNft
     ? 'You own this NFT and are eligible for rewards. Stay tuned for more details.'
     : isEligible
-    ? 'Congratulations for your open source contribution! You can claim this NFT now.'
-    : 'You have not met the requirements yet. Keep contributing to open source and you will be eligible soon.';
+    ? 'Congratulations on your open source contribution! You can claim this NFT now.'
+    : 'You have not met the requirements yet. Keep contributing to open source and you will be eligible once you have 4 or more contributions.';
   return (
     <div className="flex flex-col space-y-4 ">
       <div className="flex flex-col space-y-4">
@@ -18,7 +18,9 @@ export function OnchainRewards({ isEligible, ownsNft }: { isEligible: boolean; o
           )}
           <Image src="/nft.png" alt="NFT" width={300} height={300} />
         </div>
-        <ActionButton isEligible={isEligible} ownsNft={ownsNft} />
+        <div className="w-full max-w-[300px]">
+          <ActionButton isEligible={isEligible} ownsNft={ownsNft} />
+        </div>
       </div>
     </div>
   );

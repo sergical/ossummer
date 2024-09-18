@@ -29,6 +29,7 @@ async function getUserRewards() {
       .select('*', { count: 'exact' })
       .eq('user_id', privyUser.id);
 
+    console.log('pullRequestCount', pullRequestCount);
     if (!privyUser?.wallet?.address) {
       return {
         isEligible: false,

@@ -45,7 +45,13 @@ export function RepositoryCard({
       <CardFooter>
         <div className="flex w-full flex-row justify-between gap-2">
           <div className="flex flex-col gap-2 md:flex-row">
-            {walletAddress && <OssActions walletAddress={walletAddress} />}
+            {walletAddress && (
+              <OssActions
+                walletAddress={walletAddress}
+                targetType="project"
+                targetId={projectId ?? ''}
+              />
+            )}
             <Button variant="link" asChild>
               <Link
                 href={repo.public_url ?? ''}

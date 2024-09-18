@@ -4,6 +4,7 @@ import '@coinbase/onchainkit/styles.css';
 import { Analytics } from '@vercel/analytics/react';
 import { GeistSans } from 'geist/font/sans';
 
+import BreakpointIndicator from 'react-tailwind-breakpoint-indicator';
 import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import OnchainProviders from '@/OnchainProviders';
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <OnchainProviders>{children}</OnchainProviders>
           <Toaster richColors theme="light" />
+          <BreakpointIndicator />
         </ThemeProvider>
         <Analytics />
       </body>

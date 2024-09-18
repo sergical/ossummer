@@ -16,6 +16,7 @@ export type Database = {
           id: string
           target_id: string | null
           target_type: string | null
+          transaction_hash: string | null
           updated_at: string | null
           user_id: string | null
         }
@@ -25,6 +26,7 @@ export type Database = {
           id?: string
           target_id?: string | null
           target_type?: string | null
+          transaction_hash?: string | null
           updated_at?: string | null
           user_id?: string | null
         }
@@ -34,6 +36,7 @@ export type Database = {
           id?: string
           target_id?: string | null
           target_type?: string | null
+          transaction_hash?: string | null
           updated_at?: string | null
           user_id?: string | null
         }

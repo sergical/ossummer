@@ -3,7 +3,11 @@ import type { Config } from 'tailwindcss';
 
 const config = {
   darkMode: ['class'],
-  content: ['./app/**/*.{ts,tsx,js,jsx,mdx}', './src/**/*.{ts,tsx,js,jsx,mdx}'],
+  content: [
+    './app/**/*.{ts,tsx,js,jsx,mdx}',
+    './src/**/*.{ts,tsx,js,jsx,mdx}',
+    './node_modules/react-tailwind-breakpoint-indicator/**/*.{js,jsx,ts,tsx}',
+  ],
   prefix: '',
   theme: {
     container: {

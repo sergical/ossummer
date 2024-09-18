@@ -38,12 +38,19 @@ async function getUserRewards() {
     }
     const expectedChain = EXPECTED_CHAIN.id;
     const isEligible = pullRequestCount ? pullRequestCount >= 4 : false;
-
-    const ownsNftResponse = await engine.erc1155.getOwned(
-      privyUser.wallet?.address,
-      expectedChain.toString(),
-      EXPECTED_CONTRACT_ADDRESS,
-    );
+    console.log('isEligible', isEligible);
+    console.log('pullRequestCount', pullRequestCount);
+    console.log('privyUser.wallet?.address', privyUser.wallet?.address);
+    console.log('expectedChain', expectedChain);
+    console.log('EXPECTED_CONTRACT_ADDRESS', EXPECTED_CONTRACT_ADDRESS);
+    const ownsNftResponse = await engine.erc1155
+      .getOwned(privyUser.wallet?.address, expectedChain.toString(), EXPECTED_CONTRACT_ADDRESS)
+      .catch((error) => {
+        console.error('Error fetching NFT ownership:', error);
+        return {
+          result: [],
+        };
+      });
 
     const ownsNft = ownsNftResponse.result[0]?.quantityOwned === '1';
     return {
